@@ -1,9 +1,12 @@
-# ECS 189e Group Project
+# ECS 189E Group Project
 
 ## Members
 * Ethan Chiang
+* Kishan Patel
+* Raghav Sreeram
+* Shivam Desai
 
-## Project Discription
-This app is aim to help fitness trainer better manage his/her clients. Clinets will log their daily diet/calorie intakes and weight on this app. Trainer then can view it on this app with easy to understand visulization of the data.
+## Project Description
+Our app aims to help fitness trainer better manage their clients. Clients will be able log their diet/calorie intake and nutrition information prescribed by their trainers on a daily basis. Trainers can then view client-specific logs on this app with a creative visualization of the data to detect trends over time or inspect data for a specific day.
 
 ##
