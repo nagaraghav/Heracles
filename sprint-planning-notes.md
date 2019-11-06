@@ -12,4 +12,4 @@
 * Update markdown doc
 * Update Trello 
 
-## [Updated Trello board] (https://trello.com/b/FIhooiXX/ecs189e-project)
+## [Updated Trello board](https://trello.com/b/FIhooiXX/ecs189e-project)
