@@ -1,6 +1,6 @@
-# Spinrt Planning
+# Sprint Planning
 
-## 11/03/2019 (long)
+## 11/03/2019
 * Detailed explanation of different app ideas.
 * Discussions on doablility of each ideas, including app structure, api useage, target users, etc.
 
@@ -30,6 +30,18 @@ Example Flow: Login -> Home Page -> Log Data -> look at page with all previous l
 * Sends invites for Clients to join
 
 Example Flow: Login -> Home Page -> Choose client -> look at page with all previous logs for client
+
+#### Nice to haves:
+* Connect 1 client to more than 1 trainer
+* Messaging between trainer and client
+* Let users input nutrition info through scanning barcodes
+
+### Action Items
+* Figure out what metrics we want to include 
+* What database are we using to store information?
+* How are we handling login/auth?
+* List out the different screens/view controllers we'll need
+* UI Mockups for Login view and home page
 
 
 ## [Updated Trello board](https://trello.com/b/FIhooiXX/ecs189e-project)
