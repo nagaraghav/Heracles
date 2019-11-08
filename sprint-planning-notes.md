@@ -22,32 +22,3 @@ Our app aims to help fitness trainers better manage their clients. Clients will 
 ## 11/08/2019 Stand up meeting 
 * Hash out app UI detail
 * Assign UI mockup 
-
-### App Details
-#### Client side
-* Logging data
-* Viewing past data (Graphs, notes etc)
-* Eg. For cardio Graph of miles per day
-Example Flow: Login -> Home Page -> Log Data -> look at page with all previous logs
-
-#### Trainer side 
-* Client List 
-* View all their data
-* Assign specific metrics to log (Cardio, Calorie intake)
-* Long list of options to log (Weight, Pushups, Cardio, Calorie Intake, Protein Intake) (Switch) 
-** Point of this: personalized to the client
-* Sends invites for Clients to join
-
-Example Flow: Login -> Home Page -> Choose client -> look at page with all previous logs for client
-
-#### Nice to haves:
-* Connect 1 client to more than 1 trainer
-* Messaging between trainer and client
-* Let users input nutrition info through scanning barcodes
-
-### Action Items
-* Figure out what metrics we want to include 
-* What database are we using to store information?
-* How are we handling login/auth?
-* List out the different screens/view controllers we'll need
-* UI Mockups for Login view and home page
