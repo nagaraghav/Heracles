@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		33E694619551755B8001C2F4 /* Pods_Heracles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B589C763D645C0047CCA78 /* Pods_Heracles.framework */; };
+		92594417237BD536005D01B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92594416237BD536005D01B5 /* GoogleService-Info.plist */; };
+		92838A1F237B55FA00332577 /* AddClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92838A1E237B55FA00332577 /* AddClientViewController.swift */; };
 		92B085292377AA4300EEA54C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B085282377AA4300EEA54C /* AppDelegate.swift */; };
 		92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B0852A2377AA4300EEA54C /* ViewController.swift */; };
 		92B0852E2377AA4300EEA54C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B0852C2377AA4300EEA54C /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* Begin PBXFileReference section */
 		12881DD760F26B7A25829055 /* Pods-Heracles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heracles.debug.xcconfig"; path = "Target Support Files/Pods-Heracles/Pods-Heracles.debug.xcconfig"; sourceTree = "<group>"; };
 		21B589C763D645C0047CCA78 /* Pods_Heracles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heracles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92594416237BD536005D01B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		92838A1E237B55FA00332577 /* AddClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClientViewController.swift; sourceTree = "<group>"; };
 		92B085252377AA4300EEA54C /* Heracles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heracles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92B085282377AA4300EEA54C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92B0852A2377AA4300EEA54C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +74,9 @@
 			children = (
 				92B085282377AA4300EEA54C /* AppDelegate.swift */,
 				92B0852A2377AA4300EEA54C /* ViewController.swift */,
+				92594416237BD536005D01B5 /* GoogleService-Info.plist */,
 				92B0852C2377AA4300EEA54C /* Main.storyboard */,
+				92838A1E237B55FA00332577 /* AddClientViewController.swift */,
 				92B0852F2377AA4400EEA54C /* Assets.xcassets */,
 				92B085312377AA4400EEA54C /* LaunchScreen.storyboard */,
 				92B085342377AA4400EEA54C /* Info.plist */,
@@ -149,6 +155,7 @@
 			files = (
 				92B085332377AA4400EEA54C /* LaunchScreen.storyboard in Resources */,
 				92B0852E2377AA4300EEA54C /* Main.storyboard in Resources */,
+				92594417237BD536005D01B5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +210,7 @@
 			files = (
 				92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */,
 				92B085292377AA4300EEA54C /* AppDelegate.swift in Sources */,
+				92838A1F237B55FA00332577 /* AddClientViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
