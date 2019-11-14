@@ -11,7 +11,7 @@ Balsamiq sketches https://github.com/ECS189E/project-f19-team/blob/master/Mockup
 
 
 ## Models
-User  
+Client 
 > --Account_type : String 
   --clientID : String  
   --firstName : String  
@@ -23,9 +23,12 @@ User
   --weightGoal : Int  
   --workoutGoal : Int  
   --Logs  
-    -- logs {key = date, value = entry for each of the fields -> “calorie = 1500”}  
+ >> -- logs {key = date, value = entry for each of the fields -> “calorie = 1500”}  
+ 
+Trainer  
+> --same as client (withpout logs)
   --clientList (only for trainer)  
-    --List of clients for a specific trainer  
+ >> --List of clients for a specific trainer  
 
 ## ViewControllers
 * Login
