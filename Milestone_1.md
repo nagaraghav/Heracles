@@ -41,6 +41,18 @@ Trainer
 * Calendar page
 * Specific category page
 
+## Tasks
+* Create Client home page and client QR page - Raghav
+* Research Graph Api - Everyone
+* Create Trainer Home, Client Info Page, Specific category page - Ethan
+* Client/Trainer’s Settings Page - Kishan
+* Calendar page - Kishan
+* Integrate Firebase and Facebook for authentication (DONE) - Shivam
+* Scan QR Code page (DONE) - Shivam
+* Create entry for new user on Login if required (DONE) - Shivam
+
+
+
 ## Trello Board
 https://trello.com/ethanyichiang/boards
 
