@@ -12,6 +12,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 var currentUser: User? = nil
+var allUsers: NSDictionary = [:]
 
 class ViewController: UIViewController, FBSDKLoginButtonDelegate {
 
@@ -19,7 +20,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var newUserPopup: UIView!
     let loginButton = FBSDKLoginButton()
     var ref: DatabaseReference!
-    var allUsers: NSDictionary = [:]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 return
             }
             
-            self.allUsers = tempusers
+            allUsers = tempusers
 
         }) { (error) in
             print(error.localizedDescription)
@@ -79,6 +80,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                             print("client")
                         } else {
                             //TODO: segue to trainer home page
+                            self.performSegue(withIdentifier: "temp", sender: self)
                             print("trainer")
                         }
                     }) { (error) in
@@ -177,7 +179,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     func doesUserExist(currentUser: User) -> Bool {
         
-        for user in self.allUsers {
+        for user in allUsers {
             let curKey = String(describing: user.key)
             if curKey == currentUser.uid {
                 return true
