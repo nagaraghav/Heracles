@@ -74,18 +74,61 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
                                         
                                         self.present(alert, animated: true, completion: nil)
                                         //TODO: Actually add client to client list
+                                        
+                                        self.scannedQR = true
                                     }
                                           
                             })
                               
+                            
                         }
                         
                         
-                        scannedQR = true
                     }
                 }
             }
         }
+    }
+    
+    
+    @IBAction func addClientButtonPressed(_ sender: Any) {
+        guard let scanned_client = codeText.text else {
+            return
+        }
+
+ 
+        for user in allUsers {
+            
+            let currentKey = String(describing: user.key)
+            
+            self.ref.child("user").child(currentKey).child("clientID").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                    
+                    if snapshot.value as? String == scanned_client {
+                        print("found client \(currentKey)")
+                        let alert = UIAlertController(title: "New Client Added", message: currentKey + " added to your clients list!", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                            alert.dismiss(animated: true, completion: nil)
+                        }))
+                        
+                        self.present(alert, animated: true, completion: nil)
+                        //TODO: Actually add client to client list
+                    }
+            })
+        }
+    
+        /*
+        if !found {
+            let notFoundAlert = UIAlertController(title: "Client Not Found", message: "Client with key " + scanned_client + " not found", preferredStyle: .alert)
+            
+            notFoundAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                notFoundAlert.dismiss(animated: true, completion: nil)
+                self.codeText.text = ""
+            }))
+            self.present(notFoundAlert, animated: true, completion: nil)
+        }
+         */
     }
     
 
