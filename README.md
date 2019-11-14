@@ -27,5 +27,5 @@ Example Flow: Login -> Home Page -> Log Data -> look at page with all previous l
 
 Example Flow: Login -> Home Page -> Choose client -> look at page with all previous logs for client
 
-## Trello 
-https://github.com/ECS189E/project-f19-team
+## [Trello Board](https://trello.com/b/FIhooiXX/ecs189e-project) 
+
