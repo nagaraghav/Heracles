@@ -27,14 +27,5 @@ Example Flow: Login -> Home Page -> Log Data -> look at page with all previous l
 
 Example Flow: Login -> Home Page -> Choose client -> look at page with all previous logs for client
 
-#### Nice to haves:
-* Connect 1 client to more than 1 trainer
-* Messaging between trainer and client
-* Let users input nutrition info through scanning barcodes
-
-### Action Items
-* Figure out what metrics we want to include 
-* What database are we using to store information?
-* How are we handling login/auth?
-* List out the different screens/view controllers we'll need
-* UI Mockups for Login view and home page
+## Trello 
+https://github.com/ECS189E/project-f19-team
