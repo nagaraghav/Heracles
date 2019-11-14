@@ -40,3 +40,13 @@ Trainer
 * Settings page
 * Calendar page
 * Specific category page
+
+## Trello Board
+https://trello.com/ethanyichiang/boards
+
+## Link to project home page
+https://github.com/ECS189E/project-f19-team
+
+## Testing Plan
+* Ask local trainers to use the app and get feedback
+* Ask friend, classmate, relative to try the app and get user feedback
