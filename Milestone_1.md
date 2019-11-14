@@ -23,7 +23,7 @@ User
   --weightGoal : Int  
   --workoutGoal : Int  
   --Logs  
-   > -- logs {key = date, value = entry for each of the fields -> “calorie = 1500”}  
+ >> -- logs {key = date, value = entry for each of the fields -> “calorie = 1500”}  
   --clientList (only for trainer)  
     --List of clients for a specific trainer  
 
