@@ -11,8 +11,8 @@ Balsamiq sketches https://github.com/ECS189E/project-f19-team/blob/master/Mockup
 
 
 ## Models
-User  
-  --Account_type : String  
+User\
++ --Account_type : String\
   --clientID : String  
   --firstName : String  
   --lastName : String  
