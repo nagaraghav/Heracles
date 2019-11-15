@@ -14,7 +14,7 @@ import FirebaseAuth
 var currentUser: User? = nil
 var allUsers: NSDictionary = [:]
 
-class ViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     
     @IBOutlet weak var newUserPopup: UIView!
