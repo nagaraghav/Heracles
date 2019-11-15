@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -85,7 +83,7 @@
                     <connections>
                         <outlet property="newUserPopup" destination="dEK-6O-aY9" id="lke-dk-wLg"/>
                         <segue destination="EmT-w1-ge6" kind="show" identifier="loginToHome" id="2o7-hh-hyJ"/>
-                        <segue destination="z9F-Cm-GxE" kind="show" identifier="temp" id="l2M-vh-ma0"/>
+                        <segue destination="z9F-Cm-GxE" kind="show" identifier="temp" id="Gab-WD-slu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -97,70 +95,78 @@
             <objects>
                 <viewController id="z9F-Cm-GxE" customClass="AddClientViewController" customModule="Heracles" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RXB-hk-zdH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heracles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o66-5y-OLT">
-                                <rect key="frame" x="0.0" y="63" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="19" width="414" height="50"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code to Add Client" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DwX-Cj-PIa">
-                                <rect key="frame" x="0.0" y="179" width="414" height="32.5"/>
+                                <rect key="frame" x="0.0" y="99" width="414" height="32.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Client ID to Add Client" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CD-cD-BbX">
-                                <rect key="frame" x="0.0" y="715" width="414" height="32.5"/>
+                                <rect key="frame" x="0.0" y="625" width="414" height="32.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5w-Ti-jqo">
-                                <rect key="frame" x="0.0" y="671" width="414" height="32.5"/>
+                                <rect key="frame" x="0.0" y="585" width="414" height="32.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOc-S4-Mg6">
-                                <rect key="frame" x="44" y="267.5" width="326" height="361"/>
+                                <rect key="frame" x="44" y="150" width="326" height="406"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="326" id="FxJ-A3-9lq"/>
-                                    <constraint firstAttribute="height" constant="361" id="gJN-5x-vCu"/>
+                                    <constraint firstAttribute="height" constant="406" id="Gjd-fu-Y4v"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sy1-Dy-iFK">
+                                <rect key="frame" x="131" y="754" width="152" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Client"/>
+                                <connections>
+                                    <action selector="addClientButtonPressed:" destination="z9F-Cm-GxE" eventType="touchUpInside" id="03k-5H-09k"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6BE-Tg-Q8a">
-                                <rect key="frame" x="51" y="772" width="313" height="30"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="51" y="665" width="313" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="g5w-Ti-jqo" firstAttribute="leading" secondItem="78X-zh-uKf" secondAttribute="leading" id="5Kc-xT-hi9"/>
+                            <constraint firstItem="DwX-Cj-PIa" firstAttribute="leading" secondItem="78X-zh-uKf" secondAttribute="leading" id="Ady-O8-ONm"/>
                             <constraint firstItem="o66-5y-OLT" firstAttribute="leading" secondItem="78X-zh-uKf" secondAttribute="leading" id="BYm-jO-7oD"/>
-                            <constraint firstItem="DwX-Cj-PIa" firstAttribute="trailing" secondItem="78X-zh-uKf" secondAttribute="trailing" id="IpK-Jv-89j"/>
-                            <constraint firstItem="DwX-Cj-PIa" firstAttribute="top" secondItem="o66-5y-OLT" secondAttribute="bottom" constant="66" id="JNg-SV-7V4"/>
-                            <constraint firstItem="6BE-Tg-Q8a" firstAttribute="leading" secondItem="78X-zh-uKf" secondAttribute="leading" constant="51" id="Jvl-94-Qc8"/>
+                            <constraint firstItem="TOc-S4-Mg6" firstAttribute="leading" secondItem="78X-zh-uKf" secondAttribute="leading" constant="44" id="CHw-2d-ypv"/>
+                            <constraint firstItem="g5w-Ti-jqo" firstAttribute="trailing" secondItem="78X-zh-uKf" secondAttribute="trailing" id="Ea7-Xr-pWe"/>
+                            <constraint firstItem="DwX-Cj-PIa" firstAttribute="trailing" secondItem="78X-zh-uKf" secondAttribute="trailing" id="FO0-Jm-XhO"/>
+                            <constraint firstItem="g5w-Ti-jqo" firstAttribute="leading" secondItem="78X-zh-uKf" secondAttribute="leading" id="GQ4-jB-ebr"/>
+                            <constraint firstItem="6BE-Tg-Q8a" firstAttribute="leading" secondItem="78X-zh-uKf" secondAttribute="leading" constant="51" id="J2D-Ek-Xwx"/>
                             <constraint firstItem="o66-5y-OLT" firstAttribute="top" secondItem="78X-zh-uKf" secondAttribute="top" constant="19" id="Lih-F6-LHn"/>
-                            <constraint firstItem="DwX-Cj-PIa" firstAttribute="leading" secondItem="78X-zh-uKf" secondAttribute="leading" id="PNN-kJ-mUB"/>
-                            <constraint firstItem="g5w-Ti-jqo" firstAttribute="trailing" secondItem="78X-zh-uKf" secondAttribute="trailing" id="R5K-9T-BmD"/>
+                            <constraint firstItem="g5w-Ti-jqo" firstAttribute="top" secondItem="TOc-S4-Mg6" secondAttribute="bottom" constant="29" id="NLt-8h-ciW"/>
+                            <constraint firstItem="TOc-S4-Mg6" firstAttribute="top" secondItem="DwX-Cj-PIa" secondAttribute="bottom" constant="18.5" id="NyM-hm-9iu"/>
                             <constraint firstItem="o66-5y-OLT" firstAttribute="trailing" secondItem="78X-zh-uKf" secondAttribute="trailing" id="Sbb-RG-ceZ"/>
-                            <constraint firstItem="4CD-cD-BbX" firstAttribute="trailing" secondItem="78X-zh-uKf" secondAttribute="trailing" id="ZQc-jF-1DR"/>
-                            <constraint firstItem="4CD-cD-BbX" firstAttribute="leading" secondItem="78X-zh-uKf" secondAttribute="leading" id="ZqP-4q-yNv"/>
-                            <constraint firstItem="TOc-S4-Mg6" firstAttribute="centerX" secondItem="RXB-hk-zdH" secondAttribute="centerX" id="rCu-rC-mZt"/>
-                            <constraint firstItem="g5w-Ti-jqo" firstAttribute="top" secondItem="TOc-S4-Mg6" secondAttribute="bottom" constant="42.5" id="rzM-vg-dMi"/>
-                            <constraint firstItem="4CD-cD-BbX" firstAttribute="top" secondItem="g5w-Ti-jqo" secondAttribute="bottom" constant="11.5" id="sH2-qG-yBr"/>
-                            <constraint firstItem="6BE-Tg-Q8a" firstAttribute="top" secondItem="4CD-cD-BbX" secondAttribute="bottom" constant="24.5" id="syO-Ru-hGZ"/>
-                            <constraint firstItem="78X-zh-uKf" firstAttribute="trailing" secondItem="6BE-Tg-Q8a" secondAttribute="trailing" constant="50" id="tk8-oJ-fuy"/>
-                            <constraint firstItem="TOc-S4-Mg6" firstAttribute="centerY" secondItem="RXB-hk-zdH" secondAttribute="centerY" id="znC-sG-mqE"/>
+                            <constraint firstItem="6BE-Tg-Q8a" firstAttribute="top" secondItem="4CD-cD-BbX" secondAttribute="bottom" constant="7.5" id="gqK-oE-d60"/>
+                            <constraint firstItem="4CD-cD-BbX" firstAttribute="top" secondItem="g5w-Ti-jqo" secondAttribute="bottom" constant="7.5" id="kQI-I8-11K"/>
+                            <constraint firstItem="78X-zh-uKf" firstAttribute="trailing" secondItem="6BE-Tg-Q8a" secondAttribute="trailing" constant="50" id="kqa-gA-xY3"/>
+                            <constraint firstItem="4CD-cD-BbX" firstAttribute="trailing" secondItem="78X-zh-uKf" secondAttribute="trailing" id="pwg-3s-1Ym"/>
+                            <constraint firstItem="4CD-cD-BbX" firstAttribute="leading" secondItem="78X-zh-uKf" secondAttribute="leading" id="qHi-wY-Zlx"/>
+                            <constraint firstItem="78X-zh-uKf" firstAttribute="trailing" secondItem="TOc-S4-Mg6" secondAttribute="trailing" constant="44" id="xHy-3L-6Oc"/>
+                            <constraint firstItem="DwX-Cj-PIa" firstAttribute="top" secondItem="o66-5y-OLT" secondAttribute="bottom" constant="30" id="zNW-xL-21x"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="78X-zh-uKf"/>
                     </view>
+                    <navigationItem key="navigationItem" id="XDf-dZ-KoB"/>
                     <connections>
                         <outlet property="cameraView" destination="TOc-S4-Mg6" id="NVd-YU-4p1"/>
                         <outlet property="codeText" destination="6BE-Tg-Q8a" id="pOd-iC-cFy"/>
@@ -175,7 +181,7 @@
             <objects>
                 <viewController id="EmT-w1-ge6" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="erg-dv-9Ls">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placeholder home page" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWd-kd-lP0">
