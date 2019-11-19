@@ -80,7 +80,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                             print("client")
                         } else {
                             //TODO: segue to trainer home page
-                            self.performSegue(withIdentifier: "temp", sender: self)
+                            self.performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
                             print("trainer")
                         }
                     }) { (error) in
@@ -126,6 +126,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     } else {
                         //TODO: segue to trainer home page
                         print("trainer")
+                        self.performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
                     }
                 }) { (error) in
                     print(error.localizedDescription)
@@ -174,7 +175,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         print("new trainer created")
         //TODO: segue to trainer home page
-        //performSegue(withIdentifier: "loginToTrainerHome", sender: self)
+        performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
     }
 
     func doesUserExist(currentUser: User) -> Bool {
