@@ -93,6 +93,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - ScrollableGraphView (4.0.6)
 
 DEPENDENCIES:
   - FBSDKCoreKit (~> 4.10.0)
@@ -101,6 +102,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - ScrollableGraphView
 
 SPEC REPOS:
   trunk:
@@ -124,6 +126,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - ScrollableGraphView
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
@@ -146,7 +149,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 43b8b64263023d4f32caa0b40f4c8bfa3c5f36d8
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  ScrollableGraphView: 4af35d4ea9ecdec665d34a74da51da161ddff8ac
 
-PODFILE CHECKSUM: fa539d680fd92ad1354fb24866725a0cc0efd059
+PODFILE CHECKSUM: 5a914f5820e57d21beaed9c6856cae2833f98136
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.8.1

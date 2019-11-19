@@ -76,11 +76,10 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                         let type = snapshot.value as? String
                         
                         if type == "client" {
-                            //TODO: segue to client home page
+                            self.performSegue(withIdentifier: "loginToHome", sender: self)
                             print("client")
                         } else {
-                            //TODO: segue to trainer home page
-                            self.performSegue(withIdentifier: "temp", sender: self)
+                            self.performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
                             print("trainer")
                         }
                     }) { (error) in
@@ -121,10 +120,10 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                     let type = snapshot.value as? String
                     
                     if type == "client" {
-                        //TODO: segue to client home page
+                        self.performSegue(withIdentifier: "loginToHome", sender: self)
                         print("client")
                     } else {
-                        //TODO: segue to trainer home page
+                        self.performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
                         print("trainer")
                     }
                 }) { (error) in
@@ -157,7 +156,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         print("new client created")
         //TODO: segue to client home page
-        //performSegue(withIdentifier: "loginToClientHome", sender: self)
+        
+        performSegue(withIdentifier: "loginToHome", sender: self)
     }
     
     
@@ -174,7 +174,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         print("new trainer created")
         //TODO: segue to trainer home page
-        //performSegue(withIdentifier: "loginToTrainerHome", sender: self)
+        performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
     }
 
     func doesUserExist(currentUser: User) -> Bool {
