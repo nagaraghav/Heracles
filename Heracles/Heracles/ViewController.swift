@@ -157,6 +157,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         print("new client created")
         //TODO: segue to client home page
+        
         //performSegue(withIdentifier: "loginToClientHome", sender: self)
     }
     

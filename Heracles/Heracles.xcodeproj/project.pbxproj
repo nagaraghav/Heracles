@@ -14,6 +14,8 @@
 		92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B0852A2377AA4300EEA54C /* ViewController.swift */; };
 		92B0852E2377AA4300EEA54C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B0852C2377AA4300EEA54C /* Main.storyboard */; };
 		92B085332377AA4400EEA54C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B085312377AA4400EEA54C /* LaunchScreen.storyboard */; };
+		AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */; };
+		AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		92B0852F2377AA4400EEA54C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92B085322377AA4400EEA54C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92B085342377AA4400EEA54C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHomeViewController.swift; sourceTree = "<group>"; };
+		AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client_QR_ViewController.swift; sourceTree = "<group>"; };
 		BE9ACD3E2F44DE0CB66B5485 /* Pods-Heracles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heracles.release.xcconfig"; path = "Target Support Files/Pods-Heracles/Pods-Heracles.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +80,8 @@
 				92B0852A2377AA4300EEA54C /* ViewController.swift */,
 				92594416237BD536005D01B5 /* GoogleService-Info.plist */,
 				92B0852C2377AA4300EEA54C /* Main.storyboard */,
+				AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */,
+				AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */,
 				92838A1E237B55FA00332577 /* AddClientViewController.swift */,
 				92B0852F2377AA4400EEA54C /* Assets.xcassets */,
 				92B085312377AA4400EEA54C /* LaunchScreen.storyboard */,
@@ -208,6 +214,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */,
+				AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */,
 				92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */,
 				92B085292377AA4300EEA54C /* AppDelegate.swift in Sources */,
 				92838A1F237B55FA00332577 /* AddClientViewController.swift in Sources */,
