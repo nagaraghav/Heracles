@@ -14,7 +14,7 @@ import FirebaseAuth
 var currentUser: User? = nil
 var allUsers: NSDictionary = [:]
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
+class ViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     
     @IBOutlet weak var newUserPopup: UIView!
@@ -76,10 +76,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         let type = snapshot.value as? String
                         
                         if type == "client" {
-                            //TODO: segue to client home page
+                            self.performSegue(withIdentifier: "loginToHome", sender: self)
                             print("client")
                         } else {
-                            //TODO: segue to trainer home page
                             self.performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
                             print("trainer")
                         }
@@ -121,12 +120,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     let type = snapshot.value as? String
                     
                     if type == "client" {
-                        //TODO: segue to client home page
+                        self.performSegue(withIdentifier: "loginToHome", sender: self)
                         print("client")
                     } else {
-                        //TODO: segue to trainer home page
-                        print("trainer")
                         self.performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
+                        print("trainer")
                     }
                 }) { (error) in
                     print(error.localizedDescription)
@@ -158,7 +156,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         print("new client created")
         //TODO: segue to client home page
-        //performSegue(withIdentifier: "loginToClientHome", sender: self)
+        
+        performSegue(withIdentifier: "loginToHome", sender: self)
     }
     
     
