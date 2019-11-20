@@ -20,6 +20,7 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     @IBOutlet weak var codeText: UITextField!
     var ref: DatabaseReference!
     var trainer: NSDictionary?
+    var clientCount: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,15 +37,23 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         
         ref.child("user").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
             self.trainer = snapshot.value as? NSDictionary
+            
+            guard let list = self.trainer?["clientList"] as? NSDictionary else { return }
+            
+            self.clientCount = list.count
         })
     }
     
     func addClient(clientUID: String){
-        print(trainer)
-        guard let list = trainer?["clientList"] as? NSDictionary else { return }
-        print(list)
         
-    
+        let userID = Auth.auth().currentUser?.uid
+        guard let trainerID = userID else {
+            return
+        }
+        
+        ref.child("user/" + trainerID + "/clientList/" + "client" + String(clientCount + 1)).setValue(clientUID)
+
+        clientCount += 1
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -81,7 +90,7 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
                        self.present(alert, animated: true, completion: nil)
                    
                        //TODO: Actually add client to client list
-                        addClient(clientUID: scanned_client)
+                        addClient(clientUID: currentKey)
                    }
                }
                
@@ -162,6 +171,7 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
                                     self.present(alert, animated: true, completion: nil)
                                 
                                     //TODO: Actually add client to client list
+                                    addClient(clientUID: currentKey)
                                 }
                             }
                         }

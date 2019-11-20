@@ -85,9 +85,14 @@
                                     <constraint firstAttribute="trailing" secondItem="ESb-HD-E9l" secondAttribute="trailing" id="o4T-Nw-ymV"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="fhs-sf-563">
+                                <rect key="frame" x="197" y="821" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fhs-sf-563" secondAttribute="bottom" constant="21" id="9IN-eD-Qy8"/>
+                            <constraint firstItem="fhs-sf-563" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Fpz-r0-Sat"/>
                             <constraint firstItem="dEK-6O-aY9" firstAttribute="top" secondItem="fUO-VS-NbC" secondAttribute="bottom" constant="51" id="Iy3-fO-qY7"/>
                             <constraint firstItem="fUO-VS-NbC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="adr-Ln-aNn"/>
                             <constraint firstItem="fUO-VS-NbC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="240" id="ba4-7Y-KXM"/>
@@ -98,6 +103,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Qcz-Ix-KTT"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="fhs-sf-563" id="lCA-ba-7Xv"/>
                         <outlet property="newUserPopup" destination="dEK-6O-aY9" id="lke-dk-wLg"/>
                         <segue destination="EmT-w1-ge6" kind="presentation" identifier="loginToHome" modalPresentationStyle="fullScreen" id="2o7-hh-hyJ"/>
                         <segue destination="3Yn-Ai-fJb" kind="presentation" identifier="LoginToTrainerHome" modalPresentationStyle="fullScreen" id="Deu-yF-xvC"/>
