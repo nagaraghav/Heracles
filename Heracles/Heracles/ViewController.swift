@@ -53,7 +53,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
+        
         if FBSDKAccessToken.current() != nil {
             let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
             
@@ -68,6 +68,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 }
                 
                 currentUser = user
+                
                 
                 if self.doesUserExist(currentUser: user) {
                     print("found")
@@ -91,6 +92,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 }
             }
         }
+         
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
@@ -100,6 +102,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
         
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString) 
+        
         
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
@@ -150,6 +153,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
         
         self.ref.child("user/" + user.uid +  "/account_type").setValue("client")
+        let names = self.getFirstandLastName(displayName: user.displayName ?? "")
+        setNewUserNames(userID: user.uid, firstName: names[0], lastName: names[1])
         
         //hide popup
         newUserPopup.isHidden = true
@@ -168,6 +173,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
         
         self.ref.child("user/" + user.uid +  "/account_type").setValue("trainer")
+        let names = self.getFirstandLastName(displayName: user.displayName ?? "")
+        setNewUserNames(userID: user.uid, firstName: names[0], lastName: names[1])
         
         //hide popup
         newUserPopup.isHidden = true
@@ -177,6 +184,18 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
     }
 
+    func setNewUserNames(userID: String, firstName: String, lastName: String){
+        self.ref.child("user/" + userID + "/firstName").setValue(firstName)
+        self.ref.child("user/" + userID + "/lastName").setValue(lastName)
+    }
+    
+    func getFirstandLastName(displayName: String) -> [String] {
+        var names = displayName.split{$0 == " "}.map(String.init)
+        print(names[0])
+        print(names[1])
+        return names
+    }
+    
     func doesUserExist(currentUser: User) -> Bool {
         
         for user in allUsers {
