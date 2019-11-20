@@ -9,8 +9,9 @@
 import UIKit
 import AVFoundation
 import FirebaseDatabase
+import FirebaseAuth
 
-class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var cameraView: UIView!
     
@@ -18,10 +19,87 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     var scannedQR = false
     @IBOutlet weak var codeText: UITextField!
     var ref: DatabaseReference!
+    var trainer: NSDictionary?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        codeText.delegate = self
+        //cameraView.backgroundColor = .black //delete this
+        
         ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        guard let userId = userID else{
+            return
+        }
+        
+        
+        ref.child("user").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+            self.trainer = snapshot.value as? NSDictionary
+        })
+    }
+    
+    func addClient(clientUID: String){
+        print(trainer)
+        guard let list = trainer?["clientList"] as? NSDictionary else { return }
+        print(list)
+        
+    
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard let text = textField.text else {
+            return false
+        }
+        
+        let scanned_client = text + string
+                
+        if scanned_client.count == 5 {
+            
+           textField.text = scanned_client
+           
+            var found = false
+    
+           for user in allUsers {
+               
+               let currentKey = String(describing: user.key)
+               
+               let value = user.value as? NSDictionary
+               
+               if let id = value?["clientID"] as? String, let firstName = value?["firstName"] as? String, let lastName = value?["lastName"] as? String {
+                   if id == scanned_client {
+                       print("found client \(currentKey)")
+                       found = true
+                       let alert = UIAlertController(title: "New Client Added", message: firstName + " " + lastName + " added to your clients list!", preferredStyle: .alert)
+                       
+                       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                           alert.dismiss(animated: true, completion: nil)
+                           self.codeText.text = ""
+                       }))
+                       
+                       self.present(alert, animated: true, completion: nil)
+                   
+                       //TODO: Actually add client to client list
+                        addClient(clientUID: scanned_client)
+                   }
+               }
+               
+           }
+       
+           
+           if !found {
+               let notFoundAlert = UIAlertController(title: "Client Not Found", message: "Client with ID " + scanned_client + " not found", preferredStyle: .alert)
+               
+               notFoundAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                   notFoundAlert.dismiss(animated: true, completion: nil)
+                   self.codeText.text = ""
+               }))
+               self.present(notFoundAlert, animated: true, completion: nil)
+           }
+        }
+        
+        return true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,7 +130,7 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         
         session.startRunning()
     }
-    
+
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         if !scannedQR {
             if metadataObjects != nil && metadataObjects.count != 0 {
@@ -78,6 +156,7 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
                                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                         alert.dismiss(animated: true, completion: nil)
                                         self.codeText.text = ""
+                                        self.scannedQR = false
                                     }))
                                     
                                     self.present(alert, animated: true, completion: nil)
@@ -91,55 +170,15 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             }
         }
     }
-    
-    
-    @IBAction func addClientButtonPressed(_ sender: Any) {
-    
-        guard let scanned_client = codeText.text else {
-            return
-        }
-
-        var found = false
- 
-        for user in allUsers {
-            
-            let currentKey = String(describing: user.key)
-            
-            let value = user.value as? NSDictionary
-            
-            
-            if let id = value?["clientID"] as? String, let firstName = value?["firstName"] as? String, let lastName = value?["lastName"] as? String {
-                if id == scanned_client {
-                    print("found client \(currentKey)")
-                    found = true
-                    let alert = UIAlertController(title: "New Client Added", message: firstName + " " + lastName + " added to your clients list!", preferredStyle: .alert)
-                    
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                        alert.dismiss(animated: true, completion: nil)
-                        self.codeText.text = ""
-                    }))
-                    
-                    self.present(alert, animated: true, completion: nil)
-                
-                    //TODO: Actually add client to client list
-                }
-            }
-            
-        }
-    
         
-        if !found {
-            let notFoundAlert = UIAlertController(title: "Client Not Found", message: "Client with ID " + scanned_client + " not found", preferredStyle: .alert)
-            
-            notFoundAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                notFoundAlert.dismiss(animated: true, completion: nil)
-                self.codeText.text = ""
-            }))
-            self.present(notFoundAlert, animated: true, completion: nil)
-        }
-        
+    //added UITapGestureRecognizer to View through interface builder
+    @IBAction func handleTap(recognizer: UITapGestureRecognizer){
+        hideKeyboard()
     }
     
+    @objc func hideKeyboard(){
+        view.endEditing(true)
+    }
 
 
 
