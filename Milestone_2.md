@@ -40,3 +40,5 @@
 
 ### Kishan
 * Hide height for Trainer view 
+
+[Link to updated Trello board](https://trello.com/b/FIhooiXX/ecs189e-project)
