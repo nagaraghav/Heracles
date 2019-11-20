@@ -7,7 +7,7 @@
 		<key>Bolts.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>FBSDKCoreKit.xcscheme_^#shared#^_</key>
 		<dict>
@@ -98,6 +98,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>21</integer>
+		</dict>
+		<key>ScrollableGraphView.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>22</integer>
 		</dict>
 		<key>leveldb-library.xcscheme_^#shared#^_</key>
 		<dict>
