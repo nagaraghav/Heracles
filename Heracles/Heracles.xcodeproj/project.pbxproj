@@ -16,7 +16,7 @@
 		92B085332377AA4400EEA54C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B085312377AA4400EEA54C /* LaunchScreen.storyboard */; };
 		AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */; };
 		AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */; };
-		DA0EDD1B2384C69C00A441CD /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0EDD1A2384C69C00A441CD /* Settings.swift */; };
+		DAB260782384D35B003B1D93 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB260772384D35B003B1D93 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,7 @@
 		AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHomeViewController.swift; sourceTree = "<group>"; };
 		AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client_QR_ViewController.swift; sourceTree = "<group>"; };
 		BE9ACD3E2F44DE0CB66B5485 /* Pods-Heracles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heracles.release.xcconfig"; path = "Target Support Files/Pods-Heracles/Pods-Heracles.release.xcconfig"; sourceTree = "<group>"; };
-		DA0EDD1A2384C69C00A441CD /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = SOURCE_ROOT; };
+		DAB260772384D35B003B1D93 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = "/Users/Kishan/Documents/UC Davis/Fall 2019/ECS 189E/project-f19-team/Heracles/Heracles/Settings.swift"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +78,11 @@
 		92B085272377AA4300EEA54C /* Heracles */ = {
 			isa = PBXGroup;
 			children = (
+				DAB260772384D35B003B1D93 /* Settings.swift */,
 				92B085282377AA4300EEA54C /* AppDelegate.swift */,
 				92B0852A2377AA4300EEA54C /* ViewController.swift */,
 				92594416237BD536005D01B5 /* GoogleService-Info.plist */,
 				92B0852C2377AA4300EEA54C /* Main.storyboard */,
-				DA0EDD1A2384C69C00A441CD /* Settings.swift */,
 				AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */,
 				AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */,
 				92838A1E237B55FA00332577 /* AddClientViewController.swift */,
@@ -217,7 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA0EDD1B2384C69C00A441CD /* Settings.swift in Sources */,
+				DAB260782384D35B003B1D93 /* Settings.swift in Sources */,
 				AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */,
 				AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */,
 				92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */,
