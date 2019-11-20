@@ -19,6 +19,7 @@
 		AC7273482384B48F000FE7B7 /* NutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7273472384B48F000FE7B7 /* NutritionViewController.swift */; };
 		AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */; };
 		AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */; };
+		ACBE9CE42384D5D300BE640D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBE9CE32384D5D300BE640D /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		AC7273472384B48F000FE7B7 /* NutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewController.swift; sourceTree = "<group>"; };
 		AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHomeViewController.swift; sourceTree = "<group>"; };
 		AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client_QR_ViewController.swift; sourceTree = "<group>"; };
+		ACBE9CE32384D5D300BE640D /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		BE9ACD3E2F44DE0CB66B5485 /* Pods-Heracles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heracles.release.xcconfig"; path = "Target Support Files/Pods-Heracles/Pods-Heracles.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +90,7 @@
 				92B0852A2377AA4300EEA54C /* ViewController.swift */,
 				92594416237BD536005D01B5 /* GoogleService-Info.plist */,
 				92B0852C2377AA4300EEA54C /* Main.storyboard */,
+				ACBE9CE32384D5D300BE640D /* Settings.swift */,
 				AC7273472384B48F000FE7B7 /* NutritionViewController.swift */,
 				AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */,
 				AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */,
@@ -229,6 +232,7 @@
 				AC7273482384B48F000FE7B7 /* NutritionViewController.swift in Sources */,
 				92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */,
 				963845122383CDCD000F1EBF /* TrainerHomeViewController.swift in Sources */,
+				ACBE9CE42384D5D300BE640D /* Settings.swift in Sources */,
 				92B085292377AA4300EEA54C /* AppDelegate.swift in Sources */,
 				92838A1F237B55FA00332577 /* AddClientViewController.swift in Sources */,
 			);
