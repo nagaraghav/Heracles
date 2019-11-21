@@ -9,7 +9,7 @@
 import UIKit
 import ScrollableGraphView
 
-class TrainerHomeViewController: UIViewController, UITableViewDataSource {
+class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var ClientListTableView: UITableView!
     @IBOutlet weak var ClientCounterLabel: UILabel!
@@ -28,11 +28,15 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource {
         }
         
         ClientListTableView.dataSource = self
+        ClientListTableView.delegate = self
         
         
         self.ClientCounterLabel.text = "\(self.data.count)";
     }
     
+    @IBAction func addClientButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "trainerHometoAddClient", sender: self)
+    }
     
     // MARK: table view protocol
     
@@ -51,22 +55,39 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource {
             return cell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         self.ClientListTableView.deselectRow(at: indexPath, animated: true)
         
+        print("cell tap")
+        
         // index of client selected
         self.curIndexPath = indexPath
         
-        
         // Segue to the second view controller
-        //self.performSegue(withIdentifier: "TrainerHomeToClient", sender: self)
+        self.performSegue(withIdentifier: "TrainerHomeToClientLogs", sender: self)
+        
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       if segue.identifier == "TrainerHomeToClientLogs" {
+           print("show logs")
+       }
+    }
+    
+    
+    // MARK: sign out
+    
+    @IBAction func signoutPress() {
+       
+    }
+    
+    
+    // MARK: settings
+    
+    @IBAction func settingsPress() {
+        self.performSegue(withIdentifier: "TrainerHomeToSettings", sender: self)
+    }
     
 }

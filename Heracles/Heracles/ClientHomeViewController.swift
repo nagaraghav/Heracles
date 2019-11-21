@@ -10,7 +10,8 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class ClientHomeViewController: UIViewController {
+class ClientHomeViewController: UIViewController, AddedCalories {
+   
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -96,26 +97,26 @@ class ClientHomeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
+    //Pass in firstName, lastName, height, accountType
     @IBAction func settingsPage(_ sender: Any) {
         
-    
+        
     }
     
     @IBAction func signOutButton(_ sender: Any) {
         
         let firebaseAuth = Auth.auth()
         do {
-          try firebaseAuth.signOut()
+            try firebaseAuth.signOut()
         } catch let signOutError as NSError {
-          print ("Error signing out: %@", signOutError)
+            print ("Error signing out: %@", signOutError)
         }
         
         self.dismiss(animated: true) {
             
             return
         }
-          
+        
         
     }
     
@@ -123,7 +124,7 @@ class ClientHomeViewController: UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle:nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "clientQR")
-
+        
         let qrVC = vc as! Client_QR_ViewController
         guard let user_ = self.user else{
             print("no user")
@@ -131,10 +132,36 @@ class ClientHomeViewController: UIViewController {
         }
         
         qrVC.clientCode = user_["clientID"] as? String ?? ""
-            qrVC.modalPresentationStyle = .overFullScreen
-            self.present(qrVC, animated: true)
+        qrVC.modalPresentationStyle = .overFullScreen
+        self.present(qrVC, animated: true)
         
     }
+    
+    @IBAction func cameraButton(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle:nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "nutriVC")
+        
+        let nutriVC = vc as! NutritionViewController
+        nutriVC.delegate = self
+        
+        nutriVC.modalPresentationStyle = .overFullScreen
+        self.present(nutriVC, animated: true)
+        
+    }
+    
+    func userDidAddCalories(newCalories: String) {
+           var curCalories = caloriesTF.text ?? "0"
+           
+           var cur = Int(curCalories) ?? 0
+           var new = Int(newCalories) ?? 0
+           var total = cur + new
+           caloriesTF.text = "\(total)"
+           
+       }
+       
+    
+    
     
     
     @IBAction func saveButton(_ sender: Any) {

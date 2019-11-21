@@ -16,6 +16,7 @@
 		92B085332377AA4400EEA54C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B085312377AA4400EEA54C /* LaunchScreen.storyboard */; };
 		963845122383CDCD000F1EBF /* TrainerHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963845112383CDCD000F1EBF /* TrainerHomeViewController.swift */; };
 		9661171F2383CF7F00FFB932 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661171E2383CF7F00FFB932 /* PageViewController.swift */; };
+		96611721238453C400FFB932 /* WeightLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96611720238453C400FFB932 /* WeightLogsViewController.swift */; };
 		AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */; };
 		AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		92B085342377AA4400EEA54C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		963845112383CDCD000F1EBF /* TrainerHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerHomeViewController.swift; sourceTree = "<group>"; };
 		9661171E2383CF7F00FFB932 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		96611720238453C400FFB932 /* WeightLogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightLogsViewController.swift; sourceTree = "<group>"; };
 		AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHomeViewController.swift; sourceTree = "<group>"; };
 		AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client_QR_ViewController.swift; sourceTree = "<group>"; };
 		BE9ACD3E2F44DE0CB66B5485 /* Pods-Heracles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heracles.release.xcconfig"; path = "Target Support Files/Pods-Heracles/Pods-Heracles.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				92B0852A2377AA4300EEA54C /* ViewController.swift */,
 				92594416237BD536005D01B5 /* GoogleService-Info.plist */,
 				92B0852C2377AA4300EEA54C /* Main.storyboard */,
+				96611720238453C400FFB932 /* WeightLogsViewController.swift */,
 				AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */,
 				AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */,
 				92838A1E237B55FA00332577 /* AddClientViewController.swift */,
@@ -225,6 +228,7 @@
 				AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */,
 				92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */,
 				963845122383CDCD000F1EBF /* TrainerHomeViewController.swift in Sources */,
+				96611721238453C400FFB932 /* WeightLogsViewController.swift in Sources */,
 				92B085292377AA4300EEA54C /* AppDelegate.swift in Sources */,
 				92838A1F237B55FA00332577 /* AddClientViewController.swift in Sources */,
 			);
