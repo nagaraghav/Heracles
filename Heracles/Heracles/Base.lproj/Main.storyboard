@@ -589,6 +589,14 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="lessthan.circle" catalog="system"/>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-Fa-BUC" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
+                                <rect key="frame" x="20" y="130" width="374" height="400"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="ayZ-qK-UcT"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Fgn-nK-1Qj"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="gBs-p1-TEV"/>
+                            </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLr-iv-fKv">
                                 <rect key="frame" x="8" y="538" width="398" height="36"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W6" family="Hiragino Mincho ProN" pointSize="35"/>
@@ -601,14 +609,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-Fa-BUC" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
-                                <rect key="frame" x="20" y="130" width="374" height="400"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="onr-Ub-vMm"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="Fgn-nK-1Qj"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="gBs-p1-TEV"/>
-                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -678,7 +678,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFL-5c-xU8" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
                                 <rect key="frame" x="20" y="130" width="374" height="400"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="2op-6p-uMX"/>
+                                    <constraint firstAttribute="height" constant="400" id="tor-yJ-p58"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="cvX-oQ-FgU"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="d4E-Gp-eD9"/>
@@ -855,30 +855,33 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCO-Qv-wC0">
-                                <rect key="frame" x="8" y="666" width="398" height="36"/>
+                                <rect key="frame" x="8" y="550" width="398" height="36"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W6" family="Hiragino Mincho ProN" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4k-Lg-Og3">
-                                <rect key="frame" x="8" y="710" width="398" height="36"/>
+                                <rect key="frame" x="8" y="594" width="398" height="36"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rd4-8l-l1M" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
-                                <rect key="frame" x="20" y="130" width="374" height="516"/>
+                                <rect key="frame" x="20" y="130" width="374" height="400"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="PTX-bV-p4U"/>
+                                </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="jrg-jn-2sH"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="QMX-AC-vbv"/>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BMI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nq-m8-Ozy">
-                                <rect key="frame" x="8" y="762" width="398" height="36"/>
+                                <rect key="frame" x="8" y="646" width="398" height="36"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W6" family="Hiragino Mincho ProN" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YM7-se-MYx">
-                                <rect key="frame" x="8" y="806" width="398" height="36"/>
+                                <rect key="frame" x="8" y="690" width="398" height="36"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -905,7 +908,6 @@
                             <constraint firstItem="Q4k-Lg-Og3" firstAttribute="centerX" secondItem="1fQ-fb-G68" secondAttribute="centerX" id="m9d-9d-rR6"/>
                             <constraint firstItem="UGs-ue-diz" firstAttribute="leading" secondItem="8GC-cq-qid" secondAttribute="leading" constant="8" id="mPk-Jw-9Qr"/>
                             <constraint firstItem="8GC-cq-qid" firstAttribute="trailing" secondItem="4Nq-m8-Ozy" secondAttribute="trailing" constant="8" id="njp-zb-JbU"/>
-                            <constraint firstItem="8GC-cq-qid" firstAttribute="bottom" secondItem="YM7-se-MYx" secondAttribute="bottom" constant="20" id="usZ-W5-5Bk"/>
                             <constraint firstItem="rd4-8l-l1M" firstAttribute="top" secondItem="UGs-ue-diz" secondAttribute="bottom" constant="8" id="z71-nc-9x1"/>
                             <constraint firstItem="8GC-cq-qid" firstAttribute="trailing" secondItem="LCO-Qv-wC0" secondAttribute="trailing" constant="8" id="zvu-2B-d4K"/>
                         </constraints>
