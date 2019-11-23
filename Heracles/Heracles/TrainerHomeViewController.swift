@@ -33,6 +33,9 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource {
         self.ClientCounterLabel.text = "\(self.data.count)";
     }
     
+    @IBAction func addClientButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "trainerHometoAddClient", sender: self)
+    }
     
     // MARK: table view protocol
     
