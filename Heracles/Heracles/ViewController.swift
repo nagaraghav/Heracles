@@ -218,5 +218,17 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         return false
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "LoginToTrainerHome" {
+            let segueVC : TrainerHomeViewController = segue.destination as! TrainerHomeViewController
+            
+            segueVC.allUsers = allUsers
+        }
+        
+    }
 }
+
+
 
