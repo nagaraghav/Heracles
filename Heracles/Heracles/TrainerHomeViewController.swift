@@ -161,7 +161,7 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         if segue.identifier == "TrainerHomeToSettings" {
-            let trainerSettingVC : TrainerSettingViewController = segue.destination as! TrainerSettingViewController
+            let segueVC: Settings = segue.destination as! Settings
             
             
         }
