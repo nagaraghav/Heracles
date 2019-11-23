@@ -18,9 +18,11 @@
 		963D28F62387C63400D39B99 /* NutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D28F42387C63400D39B99 /* NutritionViewController.swift */; };
 		963D28F72387C63400D39B99 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D28F52387C63400D39B99 /* Settings.swift */; };
 		9661171F2383CF7F00FFB932 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661171E2383CF7F00FFB932 /* PageViewController.swift */; };
+		AC7273482384B48F000FE7B7 /* NutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7273472384B48F000FE7B7 /* NutritionViewController.swift */; };
 		96611721238453C400FFB932 /* WeightLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96611720238453C400FFB932 /* WeightLogsViewController.swift */; };
 		AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */; };
 		AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */; };
+		ACBE9CE42384D5D300BE640D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBE9CE32384D5D300BE640D /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,9 +41,11 @@
 		963D28F42387C63400D39B99 /* NutritionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutritionViewController.swift; sourceTree = "<group>"; };
 		963D28F52387C63400D39B99 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		9661171E2383CF7F00FFB932 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		AC7273472384B48F000FE7B7 /* NutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewController.swift; sourceTree = "<group>"; };
 		96611720238453C400FFB932 /* WeightLogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightLogsViewController.swift; sourceTree = "<group>"; };
 		AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHomeViewController.swift; sourceTree = "<group>"; };
 		AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client_QR_ViewController.swift; sourceTree = "<group>"; };
+		ACBE9CE32384D5D300BE640D /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		BE9ACD3E2F44DE0CB66B5485 /* Pods-Heracles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heracles.release.xcconfig"; path = "Target Support Files/Pods-Heracles/Pods-Heracles.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +98,8 @@
 				92B0852A2377AA4300EEA54C /* ViewController.swift */,
 				92594416237BD536005D01B5 /* GoogleService-Info.plist */,
 				92B0852C2377AA4300EEA54C /* Main.storyboard */,
+				ACBE9CE32384D5D300BE640D /* Settings.swift */,
+				AC7273472384B48F000FE7B7 /* NutritionViewController.swift */,
 				96611720238453C400FFB932 /* WeightLogsViewController.swift */,
 				AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */,
 				AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */,
@@ -232,6 +238,10 @@
 				AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */,
 				9661171F2383CF7F00FFB932 /* PageViewController.swift in Sources */,
 				AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */,
+				AC7273482384B48F000FE7B7 /* NutritionViewController.swift in Sources */,
+				92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */,
+				963845122383CDCD000F1EBF /* TrainerHomeViewController.swift in Sources */,
+				ACBE9CE42384D5D300BE640D /* Settings.swift in Sources */,
 				963D28F62387C63400D39B99 /* NutritionViewController.swift in Sources */,
 				963D28F72387C63400D39B99 /* Settings.swift in Sources */,
 				92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */,
@@ -386,7 +396,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BVT62X66MW;
+				DEVELOPMENT_TEAM = 73MZSN7CBF;
 				INFOPLIST_FILE = Heracles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -405,7 +415,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BVT62X66MW;
+				DEVELOPMENT_TEAM = 73MZSN7CBF;
 				INFOPLIST_FILE = Heracles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

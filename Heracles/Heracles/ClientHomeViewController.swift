@@ -99,8 +99,20 @@ class ClientHomeViewController: UIViewController, AddedCalories {
     
     //Pass in firstName, lastName, height, accountType
     @IBAction func settingsPage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle:nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "settings")
         
+        let qrVC = vc as! Settings
+        guard let user_ = self.user else{
+            print("no user")
+            return
+        }
         
+        qrVC.firstName_input = user_["firstName"] as? String ?? ""
+        qrVC.lastName_input = user_["lastName"] as? String ?? ""
+        
+        qrVC.modalPresentationStyle = .overFullScreen
+        self.present(qrVC, animated: true)
     }
     
     @IBAction func signOutButton(_ sender: Any) {
@@ -134,7 +146,6 @@ class ClientHomeViewController: UIViewController, AddedCalories {
         qrVC.clientCode = user_["clientID"] as? String ?? ""
         qrVC.modalPresentationStyle = .overFullScreen
         self.present(qrVC, animated: true)
-        
     }
     
     @IBAction func cameraButton(_ sender: Any) {

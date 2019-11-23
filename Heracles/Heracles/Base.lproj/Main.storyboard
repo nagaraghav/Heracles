@@ -550,7 +550,6 @@
                         <outlet property="TrainerNameLabel" destination="hGB-Hu-Hdu" id="fiT-vV-d27"/>
                         <outlet property="TrainerProfileImageView" destination="qmU-V6-Tzs" id="E2w-eF-5e5"/>
                         <segue destination="5us-Gq-kl5" kind="presentation" identifier="TrainerHomeToClientLogs" modalPresentationStyle="fullScreen" id="Vlb-Aw-Ffx"/>
-                        <segue destination="gKc-8r-OBV" kind="presentation" identifier="TrainerHomeToSettings" modalPresentationStyle="fullScreen" id="yWZ-a3-JcF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTd-mW-CSP" userLabel="First Responder" sceneMemberID="firstResponder"/>

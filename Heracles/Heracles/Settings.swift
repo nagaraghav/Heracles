@@ -27,7 +27,6 @@ class Settings: UIViewController {
         firstName.text = firstName_input
         lastName.text = lastName_input
         height.text = height_input
-        
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.

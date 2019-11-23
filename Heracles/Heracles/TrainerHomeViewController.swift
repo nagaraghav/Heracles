@@ -91,6 +91,7 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
         }) { (error) in print(error.localizedDescription) }
     }
     
+
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
