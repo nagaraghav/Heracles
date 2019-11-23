@@ -16,17 +16,13 @@ protocol AddedCalories {
 class NutritionViewController: UIViewController {
 
     
-
-    @IBOutlet weak var foodName: UITextField!
+    @IBOutlet weak var foodLabel: UILabel!
     @IBOutlet weak var calorieTF: UITextField!
     
     var delegate: AddedCalories?
-
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     @IBAction func addButton(_ sender: Any) {
@@ -95,9 +91,7 @@ class NutritionViewController: UIViewController {
         findCalories()
         
     }
-    
-    
-    
+
     /*
     // MARK: - Navigation
 

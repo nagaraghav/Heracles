@@ -113,7 +113,6 @@ class ClientHomeViewController: UIViewController, AddedCalories {
         
         qrVC.modalPresentationStyle = .overFullScreen
         self.present(qrVC, animated: true)
-        
     }
     
     @IBAction func signOutButton(_ sender: Any) {
@@ -147,7 +146,6 @@ class ClientHomeViewController: UIViewController, AddedCalories {
         qrVC.clientCode = user_["clientID"] as? String ?? ""
         qrVC.modalPresentationStyle = .overFullScreen
         self.present(qrVC, animated: true)
-        
     }
     
     @IBAction func cameraButton(_ sender: Any) {
@@ -166,8 +164,8 @@ class ClientHomeViewController: UIViewController, AddedCalories {
     func userDidAddCalories(newCalories: String) {
            var curCalories = caloriesTF.text ?? "0"
            
-           var cur = Double(curCalories) ?? 0
-           var new = Double(newCalories) ?? 0
+           var cur = Int(curCalories) ?? 0
+           var new = Int(newCalories) ?? 0
            var total = cur + new
            caloriesTF.text = "\(total)"
            
