@@ -53,7 +53,7 @@ class NutritionViewController: UIViewController {
         request.addValue(appSecret, forHTTPHeaderField: "x-app-key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
        
-        let json = ["query":"\(self.foodName.text)"]
+        let json = ["query":"\(self.foodLabel.text)"]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         request.httpMethod = "POST"
         request.httpBody = jsonData

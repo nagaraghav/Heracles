@@ -92,10 +92,6 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
 
-    @IBAction func addClientButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "trainerHometoAddClient", sender: self)
-    }
-
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,7 +162,7 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         if segue.identifier == "TrainerHomeToSettings" {
-            let segueVC: Settings = segue.destination as! Settings
+            //let segueVC: Settings = segue.destination as! Settings
             
             
         }
