@@ -19,7 +19,9 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
     
     @IBOutlet weak var calorieTF: UITextField!
     @IBOutlet weak var foodLabel: UITextField!
+    
     @IBOutlet weak var cameraView: UIImageView!
+    
     @IBOutlet weak var pictureButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     
@@ -31,16 +33,17 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         foodLabel.delegate = self
     }
     
+    /*
+     When 'return' is pressed within a textbox, find calories for food
+     */
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         hideKeyboard()
-        
         findCalories()
         return true
     }
     
     //added UITapGestureRecognizer to View through interface builder
-    @IBAction func handleTap(recognizer: UITapGestureRecognizer){
+    @IBAction func handleTap(recognizer: UITapGestureRecognizer) {
         hideKeyboard()
     }
     
@@ -48,11 +51,13 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         view.endEditing(true)
     }
 
-    
+    /*
+     Use protocal/delegate to add the new calorie amount to current amount
+     */
     @IBAction func addButton(_ sender: Any) {
         delegate?.userDidAddCalories(newCalories: calorieTF.text ?? "0")
         self.dismiss(animated: true) {
-            print("add Calories and dismissed")
+            print("added Calories and dismissed")
             return
         }
     }
@@ -63,20 +68,22 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         }
     }
     
+    /*
+     Use image picker controller to take picture
+     */
     @IBAction func takePhoto(_ sender: Any) {
         let image = UIImagePickerController()
-        
         image.delegate = self
         image.sourceType = .camera
         image.allowsEditing = false
         self.present(image, animated: true)
     }
     
-   
-    func findCalories(){
-        
+    /*
+     Use current value in food text field for Nutrition API and update calorie text field
+     */
+    func findCalories() {
         let url : String = "https://trackapi.nutritionix.com/v2/natural/nutrients/"
-        
         var request = URLRequest(url: NSURL(string: url)! as URL)
         let appID = "f913256b"
         let appSecret = "584046e88dd7e69a33cdbae0b45a0eb7"
@@ -90,7 +97,12 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
             return
         }
         
-        let json = ["query":"\(food)"]
+        if food == "" {
+            self.calorieTF.text = "0"
+            return
+        }
+        
+        let json = ["query": "\(food)"]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         request.httpMethod = "POST"
         request.httpBody = jsonData
@@ -99,8 +111,6 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         addButton.isEnabled = false
         
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
-            
-            
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 DispatchQueue.main.async{
@@ -108,20 +118,19 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
                     self.activityIndicator.stopAnimating()
                     self.addButton.isEnabled = true
                 }
+                
                 return
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
-                //print(responseJSON)
+
                 let step1 = responseJSON["foods"] as? NSArray
                 let step2 = step1?[0] as? NSDictionary
-           
-                
-                guard let calories = step2?["nf_calories"] else{
+                           
+                guard let calories = step2?["nf_calories"] else {
                     print("Couldnt find calories in data")
                     DispatchQueue.main.async {
-                        self.showNetworkError()
                         self.calorieTF.text = "Calorie Data not available"
                         self.activityIndicator.stopAnimating()
                     }
@@ -133,26 +142,17 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
                     self.activityIndicator.stopAnimating()
                     self.addButton.isEnabled = true
                 }
-                
-                //self.calorieTF.text = "\(responseJSON["nf_calories"])"
             }
-            
-            
         }
         
         task.resume()
-        
-    }
-    
-    @IBAction func reloadCalories(_ sender: Any) {
-        
-        findCalories()
-        
     }
 
+    /*
+     Set UIImage view to the picture that was taken
+     */
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            
             cameraView.image = image
             predictFood(image: image)
             print("Processing.....")
@@ -161,7 +161,10 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         self.dismiss(animated: true, completion: nil)
     }
     
-    func showNetworkError(){
+    /*
+     Function to show generic network error alert
+     */
+    func showNetworkError() {
         let alert = UIAlertController(title: "Network Error", message: "Unable to establish network connection! Please try again later.", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
@@ -171,10 +174,11 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         self.present(alert, animated: true, completion: nil)
     }
     
+    /*
+     Use the passed in image for the Food prediction api and set the food label to the prediction
+     with highest confidence
+     */
     func predictFood(image: UIImage) {
-        
-        
-        
         let imageData = image.jpegData(compressionQuality: 1)
         
         guard let base64image = imageData?.base64EncodedString(options: .lineLength64Characters) else {
@@ -186,8 +190,6 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         pictureButton.isEnabled = false
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
-            
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 DispatchQueue.main.async {
@@ -195,11 +197,13 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
                     self.activityIndicator.stopAnimating()
                     self.pictureButton.isEnabled = true
                 }
+                
                 return
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             let detected = self.getTopFoodFromResponse(responseJSON: responseJSON)
+            
             DispatchQueue.main.async {
                 self.foodLabel.text = detected
                 self.findCalories()
@@ -209,8 +213,6 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         }
 
         task.resume()
-        
-        
     }
     
     func buildRequest(imageString: String) -> URLRequest {
@@ -256,6 +258,4 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         
         return "Detection Failed"
     }
-     
-
 }

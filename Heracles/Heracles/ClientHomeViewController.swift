@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import FBSDKLoginKit
 
 class ClientHomeViewController: UIViewController, AddedCalories {
    
@@ -120,8 +121,9 @@ class ClientHomeViewController: UIViewController, AddedCalories {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
+            FBSDKLoginManager().logOut()
         } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
+            print("Error signing out: %@", signOutError)
         }
         
         self.dismiss(animated: true) {
@@ -176,7 +178,7 @@ class ClientHomeViewController: UIViewController, AddedCalories {
     
     @IBAction func saveButton(_ sender: Any) {
         
-        var userID = Auth.auth().currentUser?.uid
+        let userID = Auth.auth().currentUser?.uid
         guard let userId = userID else{
             return
         }
@@ -185,7 +187,7 @@ class ClientHomeViewController: UIViewController, AddedCalories {
             (error:Error?, ref:DatabaseReference) in
             if let error = error {
                 print("Data could not be saved: \(error).")
-            } else {""
+            } else {
                 print("Data saved successfully!")
             }
         }
