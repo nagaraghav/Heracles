@@ -162,14 +162,13 @@ class ClientHomeViewController: UIViewController, AddedCalories {
     }
     
     func userDidAddCalories(newCalories: String) {
-           var curCalories = caloriesTF.text ?? "0"
-           
-           var cur = Int(curCalories) ?? 0
-           var new = Int(newCalories) ?? 0
-           var total = cur + new
-           caloriesTF.text = "\(total)"
-           
-       }
+        let curCalories = caloriesTF.text ?? "0"
+        let cur = Double(curCalories) ?? 0
+        let new = Double(newCalories) ?? 0
+        let total = cur + new
+        
+        caloriesTF.text = "\(total)"
+    }
        
     
     
