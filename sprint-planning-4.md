@@ -10,7 +10,7 @@
 * NutritionX API Integration
 
 ### Shivam
-* Food detection API Integreation and fixing minor bugs
+* Food detection API Integration and fixing minor bugs
 
 ### Ethan
 * Trainer home page
