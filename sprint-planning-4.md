@@ -1,7 +1,25 @@
-# Sprint Planning 4 Notes
+# Sprint Planning 11/25
 
+## Meeting Notes
 * Discussed last week's individual tasks and progress
 * Planned out this week's tasks and assigned tasks 
+
+## Last week - Tasks Completed
+
+### Raghav
+* NutritionX API Integration
+
+### Shivam
+* Food detection API Integreation and fixing minor bugs
+
+### Ethan
+* Trainer home page
+* Graph API
+
+### Kishan
+* Settings page
+
+## Tasks for this week
 
 ### Raghav
 * UI 
@@ -11,7 +29,7 @@
 * Handle error cases
 
 ### Ethan
-* Trainer homer page
+* Trainer home page
 * Weight logs view controller
 
 ### Kishan
