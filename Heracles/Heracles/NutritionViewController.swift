@@ -157,7 +157,7 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
             predictFood(image: image)
             print("Processing.....")
         }
-        
+    
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -235,7 +235,6 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
     
     func getTopFoodFromResponse(responseJSON: Any?) -> String {
         if let responseJSON = responseJSON as? [String: Any] {
-            //print(responseJSON)
             if let outputs = responseJSON["outputs"] {
                 if let value = outputs as? NSArray {
                     if let some_data = value[0] as? NSDictionary {
@@ -252,7 +251,6 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
                         }
                     }
                 }
-
             }
         }
         

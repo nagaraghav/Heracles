@@ -26,11 +26,10 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         super.viewDidLoad()
         
         codeText.delegate = self
-        //cameraView.backgroundColor = .black //delete this
-        
+
         ref = Database.database().reference()
         let userID = Auth.auth().currentUser?.uid
-        guard let userId = userID else{
+        guard let userId = userID else {
             return
         }
         
@@ -41,7 +40,10 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             guard let list = self.trainer?["clientList"] as? NSDictionary else { return }
             
             self.clientCount = list.count
-        })
+        }) {(error) in
+            print(error)
+            self.showNetworkError()
+        }
     }
     
     func addClient(clientUID: String){
@@ -142,7 +144,7 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         if !scannedQR {
-            if metadataObjects != nil && metadataObjects.count != 0 {
+            if metadataObjects.count != 0 {
                 if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject {
                     if object.type == AVMetadataObject.ObjectType.qr {
                         
@@ -190,6 +192,24 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         view.endEditing(true)
     }
 
+    /*
+     Function to show generic network error alert
+     */
+    func showNetworkError() {
+        let alert = UIAlertController(title: "Network Error", message: "Unable to establish network connection! Please try again later.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 
 
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true) {
+            return
+        }
+    }
+    
 }
