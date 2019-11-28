@@ -11,25 +11,20 @@ import ScrollableGraphView
 import FirebaseDatabase
 import FirebaseAuth
 
-class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource {
+class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var weightsScrollableGraphView: ScrollableGraphView!
-    @IBOutlet weak var weightGoalLabel: UILabel!
+    @IBOutlet weak var weightGoalLabel: UITextField!
     
     private var ref: DatabaseReference!
-    
-    // MARK: Notification
-    @objc func disconnectPaxiSocket(_ notification: Notification) {
-        self.loadPage()
-        
-        // TODO: stop activity indicator
-    }
-       
     
     // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        ref = Database.database().reference()
+        
+        weightGoalLabel.delegate = self
         weightsScrollableGraphView.dataSource = self
         
         // recieving notification to reload graph
@@ -41,13 +36,57 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource 
 
     }
     
+    // MARK: Notification
+    @objc func disconnectPaxiSocket(_ notification: Notification) {
+        self.loadPage()
+        
+        // TODO: stop activity indicator
+    }
     
+    func updateWeightGoal(newWeightGoal: String) {
+
+        ref.child("user").child(logClient).child("weightGoal").setValue(newWeightGoal)
+    }
+    
+   /*
+    When 'return' is pressed within a textbox, update weight goal
+    */
+   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+       hideKeyboard()
+    
+    guard let newWeight = textField.text else {
+        return true
+    }
+    
+       updateWeightGoal(newWeightGoal: newWeight)
+       return true
+   }
+   
+   //added UITapGestureRecognizer to View through interface builder
+   @IBAction func handleTap(recognizer: UITapGestureRecognizer) {
+       hideKeyboard()
+   }
+   
+   @objc func hideKeyboard(){
+       view.endEditing(true)
+   }
+
     // MARK: ScrollableGraphView
+    
+    func setGoal(){
+        self.ref.child("user").child(logClient).child("weightGoal").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value
+            if let goal = value as? String {
+                self.weightGoalLabel.text = goal
+            }
+         }){ (error) in
+             print(error.localizedDescription)
+         }
+    }
     
     private func loadPage() {
         
-        self.weightGoalLabel.text = weightGoal
-        
+        setGoal()
         // grpah visual settings
         self.weightsScrollableGraphView.shouldAdaptRange = true
         

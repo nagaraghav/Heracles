@@ -11,10 +11,11 @@ import ScrollableGraphView
 import FirebaseDatabase
 import FirebaseAuth
 
-class WorkourLogsViewController: UIViewController, ScrollableGraphViewDataSource {
+class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var workoutScrollableGraphView: ScrollableGraphView!
-    @IBOutlet weak var workoutGoalLabel: UILabel!
+
+    @IBOutlet weak var workoutGoalLabel: UITextField!
     
     private var ref: DatabaseReference!
     
@@ -28,25 +29,64 @@ class WorkourLogsViewController: UIViewController, ScrollableGraphViewDataSource
     
      // MARK: viewWillAppear
      override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(true)
+        super.viewWillAppear(true)
         
+        workoutGoalLabel.delegate = self
         workoutScrollableGraphView.dataSource = self
         
+        ref = Database.database().reference()
         // recieving notification to reload graph
         NotificationCenter.default.addObserver(self, selector: #selector(disconnectPaxiSocket(_:)), name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
         
         self.loadPage()
-        
-        // TODO: start activity indicator
-
     }
     
+    func updateWorkoutGoal(newWorkoutGoal: String) {
+
+         ref.child("user").child(logClient).child("workoutGoal").setValue(newWorkoutGoal)
+     }
+     
+    /*
+     When 'return' is pressed within a textbox, update goal
+     */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideKeyboard()
+     
+     guard let newWorkout = textField.text else {
+         return true
+     }
+     
+        updateWorkoutGoal(newWorkoutGoal: newWorkout)
+        return true
+    }
+    
+    //added UITapGestureRecognizer to View through interface builder
+    @IBAction func handleTap(recognizer: UITapGestureRecognizer) {
+        hideKeyboard()
+    }
+    
+    @objc func hideKeyboard(){
+        view.endEditing(true)
+    }
+
+     // MARK: ScrollableGraphView
+     
+     func setGoal(){
+         self.ref.child("user").child(logClient).child("workoutGoal").observeSingleEvent(of: .value, with: { (snapshot) in
+             let value = snapshot.value
+             if let goal = value as? String {
+                 self.workoutGoalLabel.text = goal
+             }
+          }){ (error) in
+              print(error.localizedDescription)
+          }
+     }
     
     // MARK: ScrollableGraphView
     
     private func loadPage() {
         
-        self.workoutGoalLabel.text = workoutGoal
+        setGoal()
         
         // grpah visual settings
         self.workoutScrollableGraphView.shouldAdaptRange = true

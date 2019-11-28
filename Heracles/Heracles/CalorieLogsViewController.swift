@@ -8,12 +8,16 @@
 
 import UIKit
 import ScrollableGraphView
+import FirebaseDatabase
 
-class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource {
+class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var calorieScrollableGraphView: ScrollableGraphView!
-    @IBOutlet weak var calorieGoalLabel: UILabel!
     
+    
+    @IBOutlet weak var calorieGoalLabel: UITextField!
+    
+    private var ref: DatabaseReference!
     
     // MARK: Notification
     @objc func disconnectPaxiSocket(_ notification: Notification) {
@@ -25,7 +29,9 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
     // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        calorieGoalLabel.delegate = self
         
+        ref = Database.database().reference()
         calorieScrollableGraphView.dataSource = self
         
         // recieving notification to reload graph
@@ -37,12 +43,51 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
 
     }
     
-    
+    func updateCalorieGoal(newCalorieGoal: String) {
+
+           ref.child("user").child(logClient).child("calorieGoal").setValue(newCalorieGoal)
+       }
+       
+      /*
+       When 'return' is pressed within a textbox, update weight goal
+       */
+      func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+          hideKeyboard()
+       
+       guard let newCalorie = textField.text else {
+           return true
+       }
+       
+          updateCalorieGoal(newCalorieGoal: newCalorie)
+          return true
+      }
+      
+      //added UITapGestureRecognizer to View through interface builder
+      @IBAction func handleTap(recognizer: UITapGestureRecognizer) {
+          hideKeyboard()
+      }
+      
+      @objc func hideKeyboard(){
+          view.endEditing(true)
+      }
+
+       // MARK: ScrollableGraphView
+       
+       func setGoal(){
+           self.ref.child("user").child(logClient).child("calorieGoal").observeSingleEvent(of: .value, with: { (snapshot) in
+               let value = snapshot.value
+               if let goal = value as? String {
+                   self.calorieGoalLabel.text = goal
+               }
+            }){ (error) in
+                print(error.localizedDescription)
+            }
+       }
     // MARK: ScrollableGraphView
     
     private func loadPage() {
         
-        self.calorieGoalLabel.text = calorieGoal
+        setGoal()
         
         self.calorieScrollableGraphView.shouldAnimateOnStartup = true
         

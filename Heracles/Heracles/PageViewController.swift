@@ -150,7 +150,7 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                     let log = logs?[date] as? NSDictionary
                     
                     // There should be dates to cast as string, or else database is broken
-                    var date = Array(date as! String)
+                    let date = Array(date)
                     dates.append("\(date[3])\(date[4])/\(date[0])\(date[1])")
                     
                     let categories = log?.allKeys
@@ -159,13 +159,22 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                         if let category = category as? String {
                             if category == "weight" {
                                 // There should always be data to cast as Double
-                                weightsLogs.append(Double(log?[category] as! String)!)
+                                let val_log = log?[category] as? String
+                                if let val = val_log {
+                                    weightsLogs.append(Double(val)!)
+                                }
                             }
                             if category == "calorie" {
-                                calorieLogs.append(Double(log?[category] as! String)!)
+                                let val_log = log?[category] as? String
+                                if let val = val_log {
+                                    calorieLogs.append(Double(val)!)
+                                }
                             }
                             if category == "workout" {
-                                workoutLogs.append(Double(log?[category] as! String)!)
+                                let val_log = log?[category] as? String
+                                if let val = val_log {
+                                    workoutLogs.append(Double(val)!)
+                                }
                             }
                             //print("working")
                         }
@@ -175,6 +184,8 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
                 
                 
-        }) { (error) in print(error.localizedDescription) }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
 }

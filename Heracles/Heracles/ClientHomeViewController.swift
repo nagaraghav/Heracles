@@ -60,11 +60,13 @@ class ClientHomeViewController: UIViewController, AddedCalories {
             let logs_ = value?["logs"] as? NSDictionary
             guard let logs = logs_ else{
                 print("no logs available")
+                self.activityIndicator.stopAnimating()
                 return
             }
             
             guard let log_today = logs[formattedDate] as? NSDictionary else{
                 print("no logs for \(formattedDate)date")
+                self.activityIndicator.stopAnimating()
                 return
             }
             
@@ -192,6 +194,7 @@ class ClientHomeViewController: UIViewController, AddedCalories {
                 self.showNetworkError()
             } else {
                 print("Data saved successfully!")
+                self.showSaved()
                 self.activityIndicator.stopAnimating()
             }
         }
@@ -203,6 +206,19 @@ class ClientHomeViewController: UIViewController, AddedCalories {
      */
     func showNetworkError() {
         let alert = UIAlertController(title: "Network Error", message: "Unable to establish network connection! Please try again later.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    /*
+     Function to show information was saved
+     */
+    func showSaved() {
+        let alert = UIAlertController(title: "Success", message: "Your daily log was updated successfully!", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             alert.dismiss(animated: true, completion: nil)
