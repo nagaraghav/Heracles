@@ -7,6 +7,17 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
+import FBSDKLoginKit
+
+var weightGoal: String = ""
+var calorieGoal: String = ""
+var workoutGoal: String = ""
+var dates: [String] = []
+var weightsLogs: [Double] = []
+var calorieLogs: [Double] = []
+var workoutLogs: [Double] = []
 
 class PageViewController: UIPageViewController,UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
@@ -20,18 +31,31 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
     }
     
+    public var clientID : String = ""
+    private var ref: DatabaseReference!
+    let dispatchGroup = DispatchGroup()
+    
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.dataSource = self
         self.delegate = self
         
+        
+        self.getData()
+        
+        
         // Set first page
         if let weightVC = self.VCs.first {
             self.setViewControllers([weightVC], direction: .forward, animated: true, completion: nil)
         }
+        
+       
+        
     }
     
+    // MARK: UIPageControl
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -40,7 +64,12 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                 view.frame = UIScreen.main.bounds
             }
             else if view is UIPageControl {
-                view.backgroundColor = UIColor.clear
+                view.backgroundColor = UIColor.lightGray
+                view.frame.size.width = 60
+                view.frame.size.height = 30
+                view.center = CGPoint(x: self.view.frame.size.width  / 2,
+                                      y: self.view.frame.size.height - 40)
+                view.layer.cornerRadius = 10
             }
         }
     }
@@ -97,5 +126,55 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
         }
         
         return firstVCIndex
+    }
+    
+    // MARK: getData
+    private func getData(){
+        ref = Database.database().reference()
+        self.ref.child("user").child(self.clientID).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                let value = snapshot.value as? NSDictionary
+                
+                // MARK: get goals
+                weightGoal = value?["weightGoal"] as? String ?? ""
+                calorieGoal = value?["calorieGoal"] as? String ?? ""
+                workoutGoal = value?["workoutGoal"] as? String ?? ""
+            
+                // MARK: get logs
+                let logs = value?["logs"] as? NSDictionary
+                
+                var logDates = logs?.allKeys as? [String]
+                logDates = logDates?.sorted()
+                
+                logDates?.forEach { date in
+                    let log = logs?[date] as? NSDictionary
+                    
+                    // There should be dates to cast as string, or else database is broken
+                    var date = Array(date as! String)
+                    dates.append("\(date[3])\(date[4])/\(date[0])\(date[1])")
+                    
+                    let categories = log?.allKeys
+                    
+                    categories?.forEach { category in
+                        if let category = category as? String {
+                            if category == "weight" {
+                                // There should always be data to cast as Double
+                                weightsLogs.append(Double(log?[category] as! String)!)
+                            }
+                            if category == "calorie" {
+                                calorieLogs.append(Double(log?[category] as! String)!)
+                            }
+                            if category == "workout" {
+                                workoutLogs.append(Double(log?[category] as! String)!)
+                            }
+                            //print("working")
+                        }
+                    }
+                }
+                //print("parse done")
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
+                
+                
+        }) { (error) in print(error.localizedDescription) }
     }
 }

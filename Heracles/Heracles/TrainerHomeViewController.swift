@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ScrollableGraphView
 import FirebaseDatabase
 import FirebaseAuth
 import FBSDKLoginKit
@@ -16,8 +15,6 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBOutlet weak var ClientListTableView: UITableView!
     @IBOutlet weak var ClientCounterLabel: UILabel!
-    
-    
     @IBOutlet weak var TrainerNameLabel: UILabel!
     @IBOutlet weak var GymNameLabel: UILabel!
     @IBOutlet weak var TrainerProfileImageView: UIImageView!
@@ -28,11 +25,10 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     var allUsers: NSDictionary = [:]
     
-    
     private var curIndexPath : IndexPath? = nil
     
     private var ref: DatabaseReference!
-    private var user: NSDictionary?
+    //private var user: NSDictionary?
     
     // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
@@ -47,8 +43,8 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         ref = Database.database().reference()
         
-        let userID = Auth.auth().currentUser?.uid
-        guard let userId = userID else{
+        //let userID = Auth.auth().currentUser?.uid
+        guard let userId = Auth.auth().currentUser?.uid else{
             return
         }
         
@@ -62,21 +58,17 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
             let gymName = value?["gymName"] as? String ?? ""
             
             
+            
             self.TrainerNameLabel.text = "\(firstName) \(lastName)"
             self.GymNameLabel.text = gymName
             
-        }) { (error) in print(error.localizedDescription) }
-        
-        // get client list
-        ref.child("user").child(userId).child("clientList").observeSingleEvent(of: .value, with: { (snapshot) in
             
-            let value = snapshot.value as? NSDictionary
-            let clientIds = value?.allValues
-            
-            
+            // Get client names
+            let clientList = value?["clientList"] as? NSDictionary
+            let clientIds = clientList?.allValues
             
             clientIds?.forEach {id in
-                
+                    
                 self.clientIds.append(id as! String)
                 
                 let client = self.allUsers[id] as? NSDictionary ?? nil
@@ -87,7 +79,7 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
                 self.clientNames.append("\(firstName) \(lastName)")
                 self.ClientListTableView.reloadData()
             }
-            
+             self.ClientCounterLabel.text = "\(self.clientNames.count)";
         }) { (error) in print(error.localizedDescription) }
     }
     
@@ -98,8 +90,6 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         ClientListTableView.dataSource = self
         ClientListTableView.delegate = self
-        
-        self.ClientCounterLabel.text = "\(self.clientNames.count)";
     }
     
     @IBAction func addClientButtonPressed(_ sender: Any) {
@@ -161,9 +151,18 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         if segue.identifier == "TrainerHomeToSettings" {
-            //let segueVC: Settings = segue.destination as! Settings
+            let segueVC: Settings = segue.destination as! Settings
             
+            let nameArr = self.TrainerNameLabel.text!.components(separatedBy: " ")
             
+            segueVC.firstName.text = nameArr[0]
+            segueVC.lastName.text = nameArr[1]
+            
+        }
+        
+        if segue.identifier == "TrainerHomeToClientLogs" {
+            let segueVC: PageViewController = segue.destination as! PageViewController
+            segueVC.clientID = self.clientIds[self.curIndexPath!.row]
         }
     }
     
@@ -201,4 +200,8 @@ extension UIImageView {
          }
       }
    }
+    
+    
+    
+    
 }
