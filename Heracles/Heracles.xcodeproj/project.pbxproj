@@ -17,9 +17,12 @@
 		963845122383CDCD000F1EBF /* TrainerHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963845112383CDCD000F1EBF /* TrainerHomeViewController.swift */; };
 		963D28F62387C63400D39B99 /* NutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D28F42387C63400D39B99 /* NutritionViewController.swift */; };
 		963D28F72387C63400D39B99 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D28F52387C63400D39B99 /* Settings.swift */; };
+		963D28FB2389983B00D39B99 /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D28FA2389983B00D39B99 /* Logs.swift */; };
 		9661171F2383CF7F00FFB932 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661171E2383CF7F00FFB932 /* PageViewController.swift */; };
-		AC7273482384B48F000FE7B7 /* NutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7273472384B48F000FE7B7 /* NutritionViewController.swift */; };
 		96611721238453C400FFB932 /* WeightLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96611720238453C400FFB932 /* WeightLogsViewController.swift */; };
+		968DE281238F53FF00A6A7A0 /* WorkoutLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968DE280238F53FF00A6A7A0 /* WorkoutLogsViewController.swift */; };
+		968DE288238F57AB00A6A7A0 /* CalorieLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968DE287238F57AB00A6A7A0 /* CalorieLogsViewController.swift */; };
+		AC7273482384B48F000FE7B7 /* NutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7273472384B48F000FE7B7 /* NutritionViewController.swift */; };
 		AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */; };
 		AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */; };
 		ACBE9CE42384D5D300BE640D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBE9CE32384D5D300BE640D /* Settings.swift */; };
@@ -40,9 +43,12 @@
 		963845112383CDCD000F1EBF /* TrainerHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerHomeViewController.swift; sourceTree = "<group>"; };
 		963D28F42387C63400D39B99 /* NutritionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutritionViewController.swift; sourceTree = "<group>"; };
 		963D28F52387C63400D39B99 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		963D28FA2389983B00D39B99 /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
 		9661171E2383CF7F00FFB932 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
-		AC7273472384B48F000FE7B7 /* NutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewController.swift; sourceTree = "<group>"; };
 		96611720238453C400FFB932 /* WeightLogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightLogsViewController.swift; sourceTree = "<group>"; };
+		968DE280238F53FF00A6A7A0 /* WorkoutLogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogsViewController.swift; sourceTree = "<group>"; };
+		968DE287238F57AB00A6A7A0 /* CalorieLogsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieLogsViewController.swift; sourceTree = "<group>"; };
+		AC7273472384B48F000FE7B7 /* NutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewController.swift; sourceTree = "<group>"; };
 		AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHomeViewController.swift; sourceTree = "<group>"; };
 		AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client_QR_ViewController.swift; sourceTree = "<group>"; };
 		ACBE9CE32384D5D300BE640D /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -90,9 +96,12 @@
 		92B085272377AA4300EEA54C /* Heracles */ = {
 			isa = PBXGroup;
 			children = (
+				968DE287238F57AB00A6A7A0 /* CalorieLogsViewController.swift */,
+				968DE280238F53FF00A6A7A0 /* WorkoutLogsViewController.swift */,
 				963D28F42387C63400D39B99 /* NutritionViewController.swift */,
 				963D28F52387C63400D39B99 /* Settings.swift */,
 				9661171E2383CF7F00FFB932 /* PageViewController.swift */,
+				963D28FA2389983B00D39B99 /* Logs.swift */,
 				963845112383CDCD000F1EBF /* TrainerHomeViewController.swift */,
 				92B085282377AA4300EEA54C /* AppDelegate.swift */,
 				92B0852A2377AA4300EEA54C /* ViewController.swift */,
@@ -236,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */,
+				963D28FB2389983B00D39B99 /* Logs.swift in Sources */,
 				9661171F2383CF7F00FFB932 /* PageViewController.swift in Sources */,
 				AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */,
 				AC7273482384B48F000FE7B7 /* NutritionViewController.swift in Sources */,
@@ -243,7 +253,9 @@
 				963845122383CDCD000F1EBF /* TrainerHomeViewController.swift in Sources */,
 				ACBE9CE42384D5D300BE640D /* Settings.swift in Sources */,
 				963D28F62387C63400D39B99 /* NutritionViewController.swift in Sources */,
+				968DE281238F53FF00A6A7A0 /* WorkoutLogsViewController.swift in Sources */,
 				963D28F72387C63400D39B99 /* Settings.swift in Sources */,
+				968DE288238F57AB00A6A7A0 /* CalorieLogsViewController.swift in Sources */,
 				92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */,
 				963845122383CDCD000F1EBF /* TrainerHomeViewController.swift in Sources */,
 				96611721238453C400FFB932 /* WeightLogsViewController.swift in Sources */,

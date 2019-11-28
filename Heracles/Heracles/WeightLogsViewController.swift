@@ -8,66 +8,97 @@
 
 import UIKit
 import ScrollableGraphView
-
+import FirebaseDatabase
+import FirebaseAuth
 
 class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource {
     
     @IBOutlet weak var weightsScrollableGraphView: ScrollableGraphView!
+    @IBOutlet weak var weightGoalLabel: UILabel!
     
-    private var prevVC : String = "trainer"
+    private var ref: DatabaseReference!
     
-    let linePlotData : [Double] = [5,6,7,8,9,1,2,3,4,10,22,50]
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    // MARK: Notification
+    @objc func disconnectPaxiSocket(_ notification: Notification) {
+        self.loadPage()
         
-//        self.pageControl.backgroundColor = UIColor.clear
-//        self.pageControl.currentPageIndicatorTintColor = UIColor.darkGray
-//        self.pageControl.pageIndicatorTintColor = UIColor.gray
+        // TODO: stop activity indicator
+    }
+       
+    
+    // MARK: viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
         weightsScrollableGraphView.dataSource = self
         
-//        
-        self.createGraph()
+        // recieving notification to reload graph
+        NotificationCenter.default.addObserver(self, selector: #selector(disconnectPaxiSocket(_:)), name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
+        
+        self.loadPage()
+        
+        // TODO: start activity indicator
+
     }
     
     
     // MARK: ScrollableGraphView
     
-    func createGraph() {
+    private func loadPage() {
         
-        let linePlot = LinePlot(identifier: "line") // Identifier should be unique for each plot.
+        self.weightGoalLabel.text = weightGoal
+        
+        // grpah visual settings
+        self.weightsScrollableGraphView.shouldAdaptRange = true
+        
+        self.weightsScrollableGraphView.reload()
+        
+        let linePlot = LinePlot(identifier: "darkLine")
         let referenceLines = ReferenceLines()
+        
+        linePlot.lineWidth = 1
+        linePlot.lineColor = UIColor.lightGray
+        linePlot.lineStyle = ScrollableGraphViewLineStyle.smooth
 
+        linePlot.shouldFill = true
+        linePlot.fillType = ScrollableGraphViewFillType.gradient
+        linePlot.fillGradientType = ScrollableGraphViewGradientType.linear
+        linePlot.fillGradientStartColor = UIColor.gray
+        linePlot.fillGradientEndColor = UIColor.lightGray
+        linePlot.adaptAnimationType = ScrollableGraphViewAnimationType.elastic
+        let dotPlot = DotPlot(identifier: "darkLineDot") // Add dots as well.
+        dotPlot.dataPointSize = 2
+        dotPlot.dataPointFillColor = UIColor.white
+        dotPlot.adaptAnimationType = ScrollableGraphViewAnimationType.elastic
+        referenceLines.referenceLineLabelFont = UIFont.boldSystemFont(ofSize: 8)
+        referenceLines.referenceLineColor = UIColor.white.withAlphaComponent(0.2)
+        referenceLines.referenceLineLabelColor = UIColor.white
+        referenceLines.dataPointLabelColor = UIColor.white.withAlphaComponent(0.5)
+        self.weightsScrollableGraphView.backgroundFillColor = UIColor.darkGray
+        self.weightsScrollableGraphView.shouldAnimateOnStartup = true
+
+        self.weightsScrollableGraphView.addReferenceLines(referenceLines: referenceLines)
         self.weightsScrollableGraphView.addPlot(plot: linePlot)
-    self.weightsScrollableGraphView.addReferenceLines(referenceLines: referenceLines)
-        
-        
-        print("plot")
-        //self.view.addSubview(graphView)
+        self.weightsScrollableGraphView.addPlot(plot: dotPlot)
+        self.weightsScrollableGraphView.addReferenceLines(referenceLines: referenceLines)
     }
     
     func value(forPlot plot: Plot, atIndex pointIndex: Int) -> Double {
         // Return the data for each plot.
-        switch(plot.identifier) {
-        case "line":
-            return self.linePlotData[pointIndex]
-        default:
-            return 0
-        }
+        return weightsLogs[pointIndex]
     }
 
     func label(atIndex pointIndex: Int) -> String {
-        return "FEB \(pointIndex)"
+        return dates[pointIndex]
+        //return self.labels[pointIndex]
     }
 
     func numberOfPoints() -> Int {
-        return self.linePlotData.count
+        return dates.count
     }
     
     
     // MARK: back button
-    
     @IBAction func backPress() {
         
         self.dismiss(animated: true) {
@@ -75,4 +106,5 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource 
         }
     }
     
+   
 }

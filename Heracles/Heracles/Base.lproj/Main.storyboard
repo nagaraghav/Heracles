@@ -422,7 +422,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Client Counter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35C-k1-1EU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client Counter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35C-k1-1EU">
                                 <rect key="frame" x="188" y="172" width="206" height="21"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W6" family="Hiragino Mincho ProN" pointSize="21"/>
                                 <nil key="textColor"/>
@@ -525,6 +525,7 @@
                             <constraint firstItem="35C-k1-1EU" firstAttribute="top" secondItem="ahQ-G5-17t" secondAttribute="bottom" constant="70" id="YfW-uN-gNh"/>
                             <constraint firstItem="PMw-Sy-m63" firstAttribute="centerY" secondItem="AX5-3v-62w" secondAttribute="centerY" id="aS2-ly-qo5"/>
                             <constraint firstItem="8Ah-hy-noF" firstAttribute="top" secondItem="eLM-jB-mop" secondAttribute="top" constant="18" id="ayc-Uy-0Jf"/>
+                            <constraint firstItem="35C-k1-1EU" firstAttribute="leading" secondItem="qmU-V6-Tzs" secondAttribute="trailing" constant="8" id="bZz-Rx-gSP"/>
                             <constraint firstItem="aAJ-Vj-c6O" firstAttribute="leading" secondItem="qmU-V6-Tzs" secondAttribute="trailing" constant="8" id="c2n-0e-sjy"/>
                             <constraint firstItem="eLM-jB-mop" firstAttribute="trailing" secondItem="qaw-Cq-Mjb" secondAttribute="trailing" constant="8" id="dA1-x8-mcW"/>
                             <constraint firstItem="AX5-3v-62w" firstAttribute="trailing" secondItem="qaw-Cq-Mjb" secondAttribute="trailing" id="dHX-id-rwx"/>
@@ -550,6 +551,7 @@
                         <outlet property="TrainerNameLabel" destination="hGB-Hu-Hdu" id="fiT-vV-d27"/>
                         <outlet property="TrainerProfileImageView" destination="qmU-V6-Tzs" id="E2w-eF-5e5"/>
                         <segue destination="5us-Gq-kl5" kind="presentation" identifier="TrainerHomeToClientLogs" modalPresentationStyle="fullScreen" id="Vlb-Aw-Ffx"/>
+                        <segue destination="gKc-8r-OBV" kind="presentation" identifier="TrainerHomeToSettings" modalPresentationStyle="fullScreen" id="Kc2-U4-eZN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTd-mW-CSP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -564,19 +566,18 @@
             </objects>
             <point key="canvasLocation" x="2430" y="-666"/>
         </scene>
-        <!--View Controller-->
+        <!--Calorie Logs View Controller-->
         <scene sceneID="fiD-BH-R3U">
             <objects>
-                <viewController storyboardIdentifier="CALORIE" id="iKO-pG-L4Z" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CALORIE" id="iKO-pG-L4Z" customClass="CalorieLogsViewController" customModule="Heracles" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HNa-Ku-thU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calorie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMk-qR-L0L">
-                                <rect key="frame" x="8" y="52" width="414" height="70"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Calorie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMk-qR-L0L">
+                                <rect key="frame" x="0.0" y="62" width="414" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="414" id="dNJ-zb-edM"/>
-                                    <constraint firstAttribute="height" constant="70" id="qk4-Yj-uAb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="50"/>
                                 <nil key="textColor"/>
@@ -590,23 +591,26 @@
                                 </constraints>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="lessthan.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="backPress" destination="iKO-pG-L4Z" eventType="touchUpInside" id="JcP-Xg-8pJ"/>
+                                </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-Fa-BUC" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
-                                <rect key="frame" x="20" y="130" width="374" height="400"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-Fa-BUC" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
+                                <rect key="frame" x="20" y="132" width="374" height="400"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="ayZ-qK-UcT"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="Fgn-nK-1Qj"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="gBs-p1-TEV"/>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLr-iv-fKv">
-                                <rect key="frame" x="8" y="538" width="398" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Goal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLr-iv-fKv">
+                                <rect key="frame" x="8" y="540" width="398" height="36"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W6" family="Hiragino Mincho ProN" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmT-iI-4OO">
-                                <rect key="frame" x="8" y="582" width="398" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Goal Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmT-iI-4OO">
+                                <rect key="frame" x="8" y="596" width="398" height="36"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -622,34 +626,37 @@
                             <constraint firstItem="HdF-3a-JyI" firstAttribute="trailing" secondItem="KmT-iI-4OO" secondAttribute="trailing" constant="8" id="QTY-b3-Xje"/>
                             <constraint firstItem="DMk-qR-L0L" firstAttribute="top" secondItem="HdF-3a-JyI" secondAttribute="top" constant="8" id="S8Y-PU-gBO"/>
                             <constraint firstItem="DMk-qR-L0L" firstAttribute="trailing" secondItem="HdF-3a-JyI" secondAttribute="trailing" constant="8" id="Vtn-ST-svL"/>
+                            <constraint firstItem="gW3-Fa-BUC" firstAttribute="top" secondItem="DMk-qR-L0L" secondAttribute="bottom" constant="8" id="ZOv-Fl-G4O"/>
                             <constraint firstItem="fEk-u4-7X5" firstAttribute="top" secondItem="HdF-3a-JyI" secondAttribute="top" constant="13" id="ZPw-vg-UZq"/>
                             <constraint firstItem="KmT-iI-4OO" firstAttribute="top" secondItem="ZLr-iv-fKv" secondAttribute="bottom" constant="8" id="gqL-lg-zh3"/>
                             <constraint firstItem="DMk-qR-L0L" firstAttribute="leading" secondItem="HdF-3a-JyI" secondAttribute="leading" constant="8" id="iR4-Ug-3ef"/>
                             <constraint firstItem="HdF-3a-JyI" firstAttribute="trailing" secondItem="gW3-Fa-BUC" secondAttribute="trailing" constant="20" id="of2-n5-wl0"/>
-                            <constraint firstItem="ZLr-iv-fKv" firstAttribute="centerX" secondItem="HNa-Ku-thU" secondAttribute="centerX" id="shy-7k-CE4"/>
                             <constraint firstItem="KmT-iI-4OO" firstAttribute="leading" secondItem="HdF-3a-JyI" secondAttribute="leading" constant="8" id="tkA-Zr-uWC"/>
                             <constraint firstItem="KmT-iI-4OO" firstAttribute="centerX" secondItem="HNa-Ku-thU" secondAttribute="centerX" id="uFQ-VP-pnc"/>
                             <constraint firstItem="fEk-u4-7X5" firstAttribute="leading" secondItem="HdF-3a-JyI" secondAttribute="leading" constant="20" id="vUG-oV-64o"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HdF-3a-JyI"/>
                     </view>
+                    <connections>
+                        <outlet property="calorieGoalLabel" destination="KmT-iI-4OO" id="nJN-XV-R3k"/>
+                        <outlet property="calorieScrollableGraphView" destination="gW3-Fa-BUC" id="FU0-Nk-HuY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eog-cN-D0j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4045" y="-666"/>
         </scene>
-        <!--View Controller-->
+        <!--Workour Logs View Controller-->
         <scene sceneID="Epb-eY-IBn">
             <objects>
-                <viewController storyboardIdentifier="WORKOUT" id="no3-bT-DDs" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WORKOUT" id="no3-bT-DDs" customClass="WorkourLogsViewController" customModule="Heracles" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oen-hU-EFF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJk-Sz-dcc">
-                                <rect key="frame" x="8" y="52" width="414" height="70"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Workout" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJk-Sz-dcc">
+                                <rect key="frame" x="0.0" y="62" width="414" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="46I-uf-EnP"/>
                                     <constraint firstAttribute="width" constant="414" id="qBE-a9-x8m"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="50"/>
@@ -664,21 +671,24 @@
                                 </constraints>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="lessthan.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="backPress" destination="no3-bT-DDs" eventType="touchUpInside" id="Bs7-3Q-WmQ"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOP-Ti-hMh">
-                                <rect key="frame" x="8" y="538" width="398" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Goal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOP-Ti-hMh">
+                                <rect key="frame" x="8" y="533" width="398" height="36"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W6" family="Hiragino Mincho ProN" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7z-7P-fT9">
-                                <rect key="frame" x="8" y="582" width="398" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Goal Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7z-7P-fT9">
+                                <rect key="frame" x="8" y="577" width="398" height="36"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFL-5c-xU8" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
-                                <rect key="frame" x="20" y="130" width="374" height="400"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFL-5c-xU8" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
+                                <rect key="frame" x="20" y="125" width="374" height="400"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="tor-yJ-p58"/>
                                 </constraints>
@@ -707,6 +717,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NN9-X9-V97"/>
                     </view>
+                    <connections>
+                        <outlet property="workoutGoalLabel" destination="M7z-7P-fT9" id="XZW-LB-261"/>
+                        <outlet property="workoutScrollableGraphView" destination="wFL-5c-xU8" id="YKn-Qf-6v6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DOv-VD-0zm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -868,7 +882,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rd4-8l-l1M" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rd4-8l-l1M" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
                                 <rect key="frame" x="20" y="130" width="374" height="400"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="PTX-bV-p4U"/>
@@ -876,25 +890,10 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="jrg-jn-2sH"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="QMX-AC-vbv"/>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BMI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nq-m8-Ozy">
-                                <rect key="frame" x="8" y="646" width="398" height="36"/>
-                                <fontDescription key="fontDescription" name="HiraMinProN-W6" family="Hiragino Mincho ProN" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YM7-se-MYx">
-                                <rect key="frame" x="8" y="690" width="398" height="36"/>
-                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="8GC-cq-qid" firstAttribute="trailing" secondItem="YM7-se-MYx" secondAttribute="trailing" constant="8" id="2wg-TP-gwV"/>
                             <constraint firstItem="Q4k-Lg-Og3" firstAttribute="top" secondItem="LCO-Qv-wC0" secondAttribute="bottom" constant="8" id="AZ4-nG-7ct"/>
-                            <constraint firstItem="YM7-se-MYx" firstAttribute="top" secondItem="4Nq-m8-Ozy" secondAttribute="bottom" constant="8" id="F6t-vD-wrj"/>
-                            <constraint firstItem="4Nq-m8-Ozy" firstAttribute="top" secondItem="Q4k-Lg-Og3" secondAttribute="bottom" constant="16" id="G7y-f2-RdP"/>
                             <constraint firstItem="X0A-wR-Ma6" firstAttribute="top" secondItem="8GC-cq-qid" secondAttribute="top" constant="13" id="GeK-FA-Sh0"/>
                             <constraint firstItem="X0A-wR-Ma6" firstAttribute="leading" secondItem="8GC-cq-qid" secondAttribute="leading" constant="20" id="HpF-T1-oxc"/>
                             <constraint firstItem="8GC-cq-qid" firstAttribute="trailing" secondItem="Q4k-Lg-Og3" secondAttribute="trailing" constant="8" id="N77-7Y-0MN"/>
@@ -902,20 +901,18 @@
                             <constraint firstItem="LCO-Qv-wC0" firstAttribute="leading" secondItem="8GC-cq-qid" secondAttribute="leading" constant="8" id="YHz-kV-OL9"/>
                             <constraint firstItem="UGs-ue-diz" firstAttribute="trailing" secondItem="8GC-cq-qid" secondAttribute="trailing" constant="8" id="a3d-7b-Ixq"/>
                             <constraint firstItem="UGs-ue-diz" firstAttribute="top" secondItem="8GC-cq-qid" secondAttribute="top" constant="8" id="ek6-Hj-498"/>
-                            <constraint firstItem="YM7-se-MYx" firstAttribute="leading" secondItem="8GC-cq-qid" secondAttribute="leading" constant="8" id="fkf-BP-veb"/>
                             <constraint firstItem="8GC-cq-qid" firstAttribute="trailing" secondItem="rd4-8l-l1M" secondAttribute="trailing" constant="20" id="hCh-Av-DVe"/>
-                            <constraint firstItem="4Nq-m8-Ozy" firstAttribute="leading" secondItem="8GC-cq-qid" secondAttribute="leading" constant="8" id="hbt-qQ-gEF"/>
                             <constraint firstItem="rd4-8l-l1M" firstAttribute="leading" secondItem="8GC-cq-qid" secondAttribute="leading" constant="20" id="jDz-1G-NpB"/>
                             <constraint firstItem="LCO-Qv-wC0" firstAttribute="top" secondItem="rd4-8l-l1M" secondAttribute="bottom" constant="20" id="jZn-0a-V2W"/>
                             <constraint firstItem="Q4k-Lg-Og3" firstAttribute="centerX" secondItem="1fQ-fb-G68" secondAttribute="centerX" id="m9d-9d-rR6"/>
                             <constraint firstItem="UGs-ue-diz" firstAttribute="leading" secondItem="8GC-cq-qid" secondAttribute="leading" constant="8" id="mPk-Jw-9Qr"/>
-                            <constraint firstItem="8GC-cq-qid" firstAttribute="trailing" secondItem="4Nq-m8-Ozy" secondAttribute="trailing" constant="8" id="njp-zb-JbU"/>
                             <constraint firstItem="rd4-8l-l1M" firstAttribute="top" secondItem="UGs-ue-diz" secondAttribute="bottom" constant="8" id="z71-nc-9x1"/>
                             <constraint firstItem="8GC-cq-qid" firstAttribute="trailing" secondItem="LCO-Qv-wC0" secondAttribute="trailing" constant="8" id="zvu-2B-d4K"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8GC-cq-qid"/>
                     </view>
                     <connections>
+                        <outlet property="weightGoalLabel" destination="Q4k-Lg-Og3" id="5ap-U1-9hA"/>
                         <outlet property="weightsScrollableGraphView" destination="rd4-8l-l1M" id="pbZ-sT-6Ek"/>
                     </connections>
                 </viewController>
