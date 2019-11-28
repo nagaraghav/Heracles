@@ -142,7 +142,6 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    
     // MARK: settings
     @IBAction func settingsPress() {
         self.performSegue(withIdentifier: "TrainerHomeToSettings", sender: self)
