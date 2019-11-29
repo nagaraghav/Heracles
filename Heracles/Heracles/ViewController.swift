@@ -17,6 +17,7 @@ var allUsers: NSDictionary = [:]
 class ViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var newUserPopup: UIView!
     let loginButton = FBSDKLoginButton()
     var ref: DatabaseReference!
@@ -24,10 +25,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initLoginButton(button: loginButton)
-        view.addSubview(loginButton)
         ref = Database.database().reference()
-        getAllUsers()
+        activityIndicator.hidesWhenStopped = true
     }
     
     func initLoginButton(button: FBSDKLoginButton) {
@@ -53,8 +52,12 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
+        getAllUsers()
+        
         if FBSDKAccessToken.current() != nil {
+            
+            activityIndicator.startAnimating()
+            
             let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
             
             Auth.auth().signIn(with: credential) { (authResult, error) in
@@ -69,11 +72,14 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 currentUser = user
                 
+                
                 if self.doesUserExist(currentUser: user) {
                     print("found")
                     self.ref.child("user").child(user.uid).child("account_type").observeSingleEvent(of: .value, with: { (snapshot) in
                         
                         let type = snapshot.value as? String
+                        
+                        self.activityIndicator.stopAnimating()
                         
                         if type == "client" {
                             self.performSegue(withIdentifier: "loginToHome", sender: self)
@@ -86,11 +92,16 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                         print(error.localizedDescription)
                     }
                 } else {
+                    self.activityIndicator.stopAnimating()
                     self.loginButton.isHidden = true
                     self.newUserPopup.isHidden = false
                 }
             }
+        } else {
+            initLoginButton(button: loginButton)
+            view.addSubview(loginButton)
         }
+         
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
@@ -98,8 +109,12 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             print(error as Any)
             return
         }
+        loginButton.isHidden = true
+        
+        activityIndicator.startAnimating()
         
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString) 
+        
         
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
@@ -118,6 +133,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 self.ref.child("user").child(user.uid).child("account_type").observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     let type = snapshot.value as? String
+                    
+                    self.activityIndicator.stopAnimating()
                     
                     if type == "client" {
                         self.performSegue(withIdentifier: "loginToHome", sender: self)
@@ -150,6 +167,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
         
         self.ref.child("user/" + user.uid +  "/account_type").setValue("client")
+        let names = self.getFirstandLastName(displayName: user.displayName ?? "")
+        setNewUserNames(userID: user.uid, firstName: names[0], lastName: names[1])
         
         //hide popup
         newUserPopup.isHidden = true
@@ -168,6 +187,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
         
         self.ref.child("user/" + user.uid +  "/account_type").setValue("trainer")
+        let names = self.getFirstandLastName(displayName: user.displayName ?? "")
+        setNewUserNames(userID: user.uid, firstName: names[0], lastName: names[1])
         
         //hide popup
         newUserPopup.isHidden = true
@@ -177,6 +198,15 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
     }
 
+    func setNewUserNames(userID: String, firstName: String, lastName: String){
+        self.ref.child("user/" + userID + "/firstName").setValue(firstName)
+        self.ref.child("user/" + userID + "/lastName").setValue(lastName)
+    }
+    
+    func getFirstandLastName(displayName: String) -> [String] {
+        return displayName.split{$0 == " "}.map(String.init)
+    }
+    
     func doesUserExist(currentUser: User) -> Bool {
         
         for user in allUsers {
