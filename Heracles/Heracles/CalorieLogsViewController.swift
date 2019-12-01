@@ -16,7 +16,7 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
     
     
     // MARK: Notification
-    @objc func disconnectPaxiSocket(_ notification: Notification) {
+    @objc func reloadPage(_ notification: Notification) {
         self.loadPage()
         
         // TODO: stop activity indicator
@@ -29,9 +29,11 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
         calorieScrollableGraphView.dataSource = self
         
         // recieving notification to reload graph
-        NotificationCenter.default.addObserver(self, selector: #selector(disconnectPaxiSocket(_:)), name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPage(_:)), name: Notification.Name(rawValue: "reloadPage"), object: nil)
         
-        self.loadPage()
+        if isDataLoaded {
+            self.loadPage()
+        }
         
         // TODO: start activity indicator
 
@@ -51,7 +53,7 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
         self.calorieScrollableGraphView.rangeMax = 3000
         self.calorieScrollableGraphView.rangeMin = 1000
         
-        self.calorieScrollableGraphView.reload()
+        
         
         let linePlot = LinePlot(identifier: "line") // Identifier should be unique for each plot.
         let referenceLines = ReferenceLines()
@@ -60,6 +62,8 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
 
         self.calorieScrollableGraphView.addPlot(plot: linePlot)
         self.calorieScrollableGraphView.addReferenceLines(referenceLines: referenceLines)
+        
+        self.calorieScrollableGraphView.reload()
     }
     
     func value(forPlot plot: Plot, atIndex pointIndex: Int) -> Double {

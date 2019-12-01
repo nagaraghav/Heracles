@@ -19,7 +19,7 @@ class WorkourLogsViewController: UIViewController, ScrollableGraphViewDataSource
     private var ref: DatabaseReference!
     
     // MARK: Notification
-    @objc func disconnectPaxiSocket(_ notification: Notification) {
+    @objc func reloadPaage(_ notification: Notification) {
         self.loadPage()
         
         // TODO: stop activity indicator
@@ -33,9 +33,11 @@ class WorkourLogsViewController: UIViewController, ScrollableGraphViewDataSource
         workoutScrollableGraphView.dataSource = self
         
         // recieving notification to reload graph
-        NotificationCenter.default.addObserver(self, selector: #selector(disconnectPaxiSocket(_:)), name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPaage(_:)), name: Notification.Name(rawValue: "reloadPaage"), object: nil)
         
-        self.loadPage()
+        if isDataLoaded {
+            self.loadPage()
+        }
         
         // TODO: start activity indicator
 

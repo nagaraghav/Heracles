@@ -43,6 +43,13 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         ref = Database.database().reference()
         
+        self.getClientList()
+        
+        // recieving notification to reload graph
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadClientList(_:)), name: Notification.Name(rawValue: "reloadClientList"), object: nil)
+    }
+    
+    private func getClientList(){
         //let userID = Auth.auth().currentUser?.uid
         guard let userId = Auth.auth().currentUser?.uid else{
             return
@@ -81,6 +88,11 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
             }
              self.ClientCounterLabel.text = "\(self.clientNames.count)";
         }) { (error) in print(error.localizedDescription) }
+    }
+    
+    // MARK: Notification
+    @objc func reloadClientList(_ notification: Notification) {
+        self.getClientList()
     }
     
 

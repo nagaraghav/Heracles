@@ -19,39 +19,44 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource 
     private var ref: DatabaseReference!
     
     // MARK: Notification
-    @objc func disconnectPaxiSocket(_ notification: Notification) {
+    @objc func reloadPage(_ notification: Notification) {
         self.loadPage()
         
         // TODO: stop activity indicator
     }
+    
+    // MARK: viewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
        
+    }
     
     // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        // set up notificationCenter observer
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPage(_:)), name: Notification.Name(rawValue: "reloadPage"), object: nil)
         weightsScrollableGraphView.dataSource = self
         
-        // recieving notification to reload graph
-        NotificationCenter.default.addObserver(self, selector: #selector(disconnectPaxiSocket(_:)), name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
+        if isDataLoaded {
+            self.loadPage()
+        }
         
-        self.loadPage()
         
         // TODO: start activity indicator
 
     }
     
     
-    // MARK: ScrollableGraphView
+    // MARK: loadPage
     
     private func loadPage() {
         
         self.weightGoalLabel.text = weightGoal
         
         // grpah visual settings
-        self.weightsScrollableGraphView.shouldAdaptRange = true
-        
-        self.weightsScrollableGraphView.reload()
         
         let linePlot = LinePlot(identifier: "darkLine")
         let referenceLines = ReferenceLines()
@@ -74,15 +79,23 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource 
         referenceLines.referenceLineColor = UIColor.white.withAlphaComponent(0.2)
         referenceLines.referenceLineLabelColor = UIColor.white
         referenceLines.dataPointLabelColor = UIColor.white.withAlphaComponent(0.5)
+        
+        
+        
         self.weightsScrollableGraphView.backgroundFillColor = UIColor.darkGray
         self.weightsScrollableGraphView.shouldAnimateOnStartup = true
 
+        self.weightsScrollableGraphView.rangeMax = 300
+        self.weightsScrollableGraphView.rangeMin = 100
         self.weightsScrollableGraphView.addReferenceLines(referenceLines: referenceLines)
         self.weightsScrollableGraphView.addPlot(plot: linePlot)
         self.weightsScrollableGraphView.addPlot(plot: dotPlot)
         self.weightsScrollableGraphView.addReferenceLines(referenceLines: referenceLines)
+        
+        self.weightsScrollableGraphView.reload()
     }
     
+    // MARK: ScrollableGraphView
     func value(forPlot plot: Plot, atIndex pointIndex: Int) -> Double {
         // Return the data for each plot.
         return weightsLogs[pointIndex]
