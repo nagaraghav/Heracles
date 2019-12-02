@@ -11,6 +11,8 @@ import FirebaseDatabase
 import FirebaseAuth
 import FBSDKLoginKit
 
+var logClient = ""
+
 class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var ClientListTableView: UITableView!
@@ -18,6 +20,8 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var TrainerNameLabel: UILabel!
     @IBOutlet weak var GymNameLabel: UILabel!
     @IBOutlet weak var TrainerProfileImageView: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     // MARK: data for client list
     var clientNames: [String] = []
@@ -34,8 +38,11 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        self.activityIndicator.hidesWhenStopped = true
+        TrainerProfileImageView.layer.cornerRadius = TrainerProfileImageView.frame.height/2
         self.clientNames.removeAll()
         
+        self.activityIndicator.startAnimating()
         if let _ = FBSDKAccessToken.current()
         {
             fetchUserProfile()
@@ -43,15 +50,9 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         ref = Database.database().reference()
         
-        self.getClientList()
-        
-        // recieving notification to reload graph
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadClientList(_:)), name: Notification.Name(rawValue: "reloadClientList"), object: nil)
-    }
-    
-    private func getClientList(){
         //let userID = Auth.auth().currentUser?.uid
-        guard let userId = Auth.auth().currentUser?.uid else{
+        guard let userId = Auth.auth().currentUser?.uid else {
+            self.showNetworkError()
             return
         }
         
@@ -74,11 +75,17 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
             let clientList = value?["clientList"] as? NSDictionary
             let clientIds = clientList?.allValues
             
-            clientIds?.forEach {id in
-                    
-                self.clientIds.append(id as! String)
+            clientIds?.forEach { id in
+                                    
+                let Uid = String(describing: id)
                 
-                let client = self.allUsers[id] as? NSDictionary ?? nil
+                if Uid == "" {
+                    return
+                }
+                
+                self.clientIds.append(Uid)
+                
+                let client = self.allUsers[Uid] as? NSDictionary ?? nil
                 
                 let firstName = client?["firstName"] as? String ?? ""
                 let lastName = client?["lastName"] as? String ?? ""
@@ -86,13 +93,11 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
                 self.clientNames.append("\(firstName) \(lastName)")
                 self.ClientListTableView.reloadData()
             }
-             self.ClientCounterLabel.text = "\(self.clientNames.count)";
-        }) { (error) in print(error.localizedDescription) }
-    }
-    
-    // MARK: Notification
-    @objc func reloadClientList(_ notification: Notification) {
-        self.getClientList()
+             self.ClientCounterLabel.text = "\(self.clientNames.count) clients";
+        }) { (error) in
+            self.showNetworkError()
+            print(error.localizedDescription)
+        }
     }
     
 
@@ -132,7 +137,7 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
         self.curIndexPath = indexPath
         
         print(self.clientIds[indexPath.row])
-        
+        logClient = clientIds[indexPath.row]
         // Segue to the second view controller
         self.performSegue(withIdentifier: "TrainerHomeToClientLogs", sender: self)
         
@@ -146,6 +151,7 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
             try firebaseAuth.signOut()
             FBSDKAccessToken.setCurrent(nil)
         } catch let signOutError as NSError {
+            self.showNetworkError()
             print ("Error signing out: %@", signOutError)
         }
 
@@ -153,7 +159,6 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
           return
         }
     }
-    
     
     // MARK: settings
     @IBAction func settingsPress() {
@@ -163,36 +168,56 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     // MARK: segue override
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
-        if segue.identifier == "TrainerHomeToSettings" {
-            let segueVC: Settings = segue.destination as! Settings
-            
-            let nameArr = self.TrainerNameLabel.text!.components(separatedBy: " ")
-            
-            segueVC.firstName.text = nameArr[0]
-            segueVC.lastName.text = nameArr[1]
-            
-        }
         
         if segue.identifier == "TrainerHomeToClientLogs" {
             let segueVC: PageViewController = segue.destination as! PageViewController
-            segueVC.clientID = self.clientIds[self.curIndexPath!.row]
+            
+            guard let id = self.curIndexPath?.row else {
+                self.showNetworkError()
+                return
+            }
+            
+            segueVC.clientID = self.clientIds[id]
         }
     }
     
     // MARK: fetchUserProfile
-    func fetchUserProfile()
-    {
+    func fetchUserProfile() {
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
 
         Auth.auth().signIn(with: credential) { (user, error) in
             if let user = Auth.auth().currentUser {
                 for profile in user.providerData {
-                let photoUrl = profile.photoURL!.absoluteString + "?type=large"
-                let url = URL(string: photoUrl)
-                self.TrainerProfileImageView.downloadImage(from: url!)
-                  }
+                        guard let temp = profile.photoURL else {
+                            self.showNetworkError()
+                            return
+                            
+                        }
+                    
+                        let photoUrl = temp.absoluteString + "?type=large"
+                        guard let url = URL(string: photoUrl) else {
+                            self.showNetworkError()
+                            return
+                        }
+                    
+                        self.TrainerProfileImageView.downloadImage(from: url)
+                    }
                 }
             }
+        self.activityIndicator.stopAnimating()
+    }
+    
+    /*
+     Function to show generic network error alert
+     */
+    func showNetworkError() {
+        let alert = UIAlertController(title: "Network Error", message: "Unable to establish network connection! Please try again later.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
@@ -202,6 +227,7 @@ extension UIImageView {
    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
       URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
    }
+    
    func downloadImage(from url: URL) {
       getData(from: url) {
          data, response, error in
@@ -213,8 +239,5 @@ extension UIImageView {
          }
       }
    }
-    
-    
-    
-    
+
 }

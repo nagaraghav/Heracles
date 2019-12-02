@@ -27,6 +27,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLoad()
         ref = Database.database().reference()
         activityIndicator.hidesWhenStopped = true
+        initLoginButton(button: loginButton)
+        view.addSubview(loginButton)
     }
     
     func initLoginButton(button: FBSDKLoginButton) {
@@ -47,15 +49,20 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             allUsers = tempusers
 
         }) { (error) in
+            self.showNetworkError()
             print(error.localizedDescription)
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        getAllUsers()
-        
+        DispatchQueue.main.async {
+            self.getAllUsers()
+        }
+                
         if FBSDKAccessToken.current() != nil {
-            
+            print("found token")
+
+            loginButton.removeFromSuperview()
             activityIndicator.startAnimating()
             
             let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
@@ -63,15 +70,16 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 if let error = error {
                     print(error)
+                    self.showNetworkError()
                     return
                 }
                 
                 guard let user = authResult?.user else {
+                    self.showNetworkError()
                     return
                 }
                 
                 currentUser = user
-                
                 
                 if self.doesUserExist(currentUser: user) {
                     print("found")
@@ -90,6 +98,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                         }
                     }) { (error) in
                         print(error.localizedDescription)
+                        self.showNetworkError()
                     }
                 } else {
                     self.activityIndicator.stopAnimating()
@@ -98,7 +107,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 }
             }
         } else {
-            initLoginButton(button: loginButton)
             view.addSubview(loginButton)
         }
          
@@ -107,9 +115,11 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print(error as Any)
+            self.showNetworkError()
             return
         }
-        loginButton.isHidden = true
+        
+        loginButton.removeFromSuperview()
         
         activityIndicator.startAnimating()
         
@@ -119,6 +129,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 print(error)
+                self.showNetworkError()
                 return
             }
             
@@ -129,7 +140,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             currentUser = user
             
             if self.doesUserExist(currentUser: user) {
-                print("found")
                 self.ref.child("user").child(user.uid).child("account_type").observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     let type = snapshot.value as? String
@@ -161,7 +171,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     @IBAction func clientButtonPressed(_ sender: Any) {
-        //TODO: create new entry for user in database with account type = client
+
         guard let user = currentUser else {
             return
         }
@@ -169,19 +179,17 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.ref.child("user/" + user.uid +  "/account_type").setValue("client")
         let names = self.getFirstandLastName(displayName: user.displayName ?? "")
         setNewUserNames(userID: user.uid, firstName: names[0], lastName: names[1])
-        
-        //hide popup
+
         newUserPopup.isHidden = true
         
         print("new client created")
-        //TODO: segue to client home page
         
         performSegue(withIdentifier: "loginToHome", sender: self)
     }
     
     
     @IBAction func trainerButtonPressed(_ sender: Any) {
-        //TODO: create new entry for user in database with account type = trainer
+        
         guard let user = currentUser else {
             return
         }
@@ -190,11 +198,10 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         let names = self.getFirstandLastName(displayName: user.displayName ?? "")
         setNewUserNames(userID: user.uid, firstName: names[0], lastName: names[1])
         
-        //hide popup
         newUserPopup.isHidden = true
         
         print("new trainer created")
-        //TODO: segue to trainer home page
+
         performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
     }
 
@@ -227,6 +234,19 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             segueVC.allUsers = allUsers
         }
         
+    }
+    
+    /*
+     Function to show generic network error alert
+     */
+    func showNetworkError() {
+        let alert = UIAlertController(title: "Network Error", message: "Unable to establish network connection! Please try again later.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

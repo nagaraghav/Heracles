@@ -18,7 +18,6 @@ var dates: [String] = []
 var weightsLogs: [Double] = []
 var calorieLogs: [Double] = []
 var workoutLogs: [Double] = []
-var isDataLoaded: Bool = false
 
 class PageViewController: UIPageViewController,UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
@@ -27,6 +26,7 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                 self.VCInstance(name: "WEIGHT"),
                 self.VCInstance(name: "WORKOUT")]
     }()
+    
     
     private func VCInstance(name: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
@@ -38,7 +38,9 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
     
     // MARK: viewDidLoad
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        print("At PageViewController!")
 
         self.dataSource = self
         self.delegate = self
@@ -51,6 +53,9 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
         if let calorieVC = self.VCs.first {
             self.setViewControllers([calorieVC], direction: .forward, animated: true, completion: nil)
         }
+        
+       
+        
     }
     
     // MARK: UIPageControl
@@ -128,6 +133,8 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
     
     // MARK: getData
     private func getData(){
+     
+        
         ref = Database.database().reference()
         self.ref.child("user").child(self.clientID).observeSingleEvent(of: .value, with: { (snapshot) in
                 
@@ -148,7 +155,7 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                     let log = logs?[date] as? NSDictionary
                     
                     // There should be dates to cast as string, or else database is broken
-                    var date = Array(date as! String)
+                    let date = Array(date)
                     dates.append("\(date[3])\(date[4])/\(date[0])\(date[1])")
                     
                     let categories = log?.allKeys
@@ -157,22 +164,36 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                         if let category = category as? String {
                             if category == "weight" {
                                 // There should always be data to cast as Double
-                                weightsLogs.append(Double(log?[category] as! String)!)
+                                let val_log = log?[category] as? String
+                                if let val = val_log {
+                                    
+                                    weightsLogs.append(Double(val)!)
+                                }
                             }
                             if category == "calorie" {
-                                calorieLogs.append(Double(log?[category] as! String)!)
+                                let val_log = log?[category] as? String
+                                if let val = val_log {
+                                    calorieLogs.append(Double(val)!)
+                                }
                             }
                             if category == "workout" {
-                                workoutLogs.append(Double(log?[category] as! String)!)
+                                let val_log = log?[category] as? String
+                                if let val = val_log {
+                                    workoutLogs.append(Double(val)!)
+                                }
                             }
                             //print("working")
                         }
                     }
                 }
-                isDataLoaded = true
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadPage"), object: nil)
+            
+            
+                // MARK: notification
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "dataLoaded"), object: nil)
                 
                 
-        }) { (error) in print(error.localizedDescription) }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
 }
