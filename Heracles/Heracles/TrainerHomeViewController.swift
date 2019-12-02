@@ -20,6 +20,8 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var TrainerNameLabel: UILabel!
     @IBOutlet weak var GymNameLabel: UILabel!
     @IBOutlet weak var TrainerProfileImageView: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     // MARK: data for client list
     var clientNames: [String] = []
@@ -35,9 +37,12 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        self.activityIndicator.hidesWhenStopped = true
         TrainerProfileImageView.layer.cornerRadius = TrainerProfileImageView.frame.height/2
         self.clientNames.removeAll()
         
+        self.activityIndicator.startAnimating()
         if let _ = FBSDKAccessToken.current()
         {
             fetchUserProfile()
@@ -199,6 +204,20 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
                     }
                 }
             }
+        self.activityIndicator.stopAnimating()
+    }
+    
+    /*
+     Function to show generic network error alert
+     */
+    func showNetworkError() {
+        let alert = UIAlertController(title: "Network Error", message: "Unable to establish network connection! Please try again later.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     /*

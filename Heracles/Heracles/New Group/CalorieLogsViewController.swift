@@ -13,17 +13,15 @@ import FirebaseDatabase
 class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var calorieScrollableGraphView: ScrollableGraphView!
-    
-    
     @IBOutlet weak var calorieGoalLabel: UITextField!
     
     private var ref: DatabaseReference!
+    private var isFirstLoad = true
     
     // MARK: Notification
-    @objc func disconnectPaxiSocket(_ notification: Notification) {
-        self.loadPage()
-        
-        // TODO: stop activity indicator
+    @objc func dataLoaded(_ notification: Notification) {
+        self.loadGraphSetup()
+        self.calorieScrollableGraphView.reload()
     }
     
     // MARK: viewWillAppear
@@ -35,12 +33,9 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
         calorieScrollableGraphView.dataSource = self
         
         // recieving notification to reload graph
-        NotificationCenter.default.addObserver(self, selector: #selector(disconnectPaxiSocket(_:)), name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dataLoaded(_:)), name: Notification.Name(rawValue: "dataLoaded"), object: nil)
         
-        self.loadPage()
-        
-        // TODO: start activity indicator
-        
+       self.calorieGoalLabel.text = calorieGoal
     }
     
     func updateCalorieGoal(newCalorieGoal: String) {
@@ -71,8 +66,7 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
         view.endEditing(true)
     }
     
-    // MARK: ScrollableGraphView
-    
+    // MARK: setGoal
     func setGoal(){
         self.ref.child("user").child(logClient).child("calorieGoal").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value
@@ -83,57 +77,29 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
             print(error.localizedDescription)
         }
     }
-    // MARK: ScrollableGraphView
     
-    private func loadPage() {
-        
-        setGoal()
+    // MARK: loadGraphSetup
+    private func loadGraphSetup() {
         
         self.calorieScrollableGraphView.shouldAnimateOnStartup = true
         
         // grpah visual settings
         //self.calorieScrollableGraphView.shouldAdaptRange = true
         self.calorieScrollableGraphView.rangeMax = 3000
-        self.calorieScrollableGraphView.rangeMin = 0
+        self.calorieScrollableGraphView.rangeMin = 1000
         
         
         
-        
-        //print("\(dates.count) : \(weightsLogs.count)")
-        
-        let linePlot = LinePlot(identifier: "darkLine")
+        let linePlot = LinePlot(identifier: "line") // Identifier should be unique for each plot.
         let referenceLines = ReferenceLines()
         
-        linePlot.lineWidth = 1
-        linePlot.lineColor = UIColor.lightGray
-        linePlot.lineStyle = ScrollableGraphViewLineStyle.smooth
-        
-        linePlot.shouldFill = true
-        linePlot.fillType = ScrollableGraphViewFillType.gradient
-        linePlot.fillGradientType = ScrollableGraphViewGradientType.linear
-        linePlot.fillGradientStartColor = UIColor.gray
-        linePlot.fillGradientEndColor = UIColor.lightGray
-        linePlot.adaptAnimationType = ScrollableGraphViewAnimationType.elastic
-        let dotPlot = DotPlot(identifier: "darkLineDot") // Add dots as well.
-        dotPlot.dataPointSize = 2
-        dotPlot.dataPointFillColor = UIColor.white
-        dotPlot.adaptAnimationType = ScrollableGraphViewAnimationType.elastic
-        referenceLines.referenceLineLabelFont = UIFont.boldSystemFont(ofSize: 8)
-        referenceLines.referenceLineColor = UIColor.white.withAlphaComponent(0.2)
-        referenceLines.referenceLineLabelColor = UIColor.white
-        referenceLines.dataPointLabelColor = UIColor.white.withAlphaComponent(0.5)
-        self.calorieScrollableGraphView.backgroundFillColor = UIColor.darkGray
-        self.calorieScrollableGraphView.shouldAnimateOnStartup = true
-        
-        
-        
-        
+        //print("\(dates.count) : \(weightsLogs.count)")
+
         self.calorieScrollableGraphView.addPlot(plot: linePlot)
-        self.calorieScrollableGraphView.addPlot(plot: dotPlot)
         self.calorieScrollableGraphView.addReferenceLines(referenceLines: referenceLines)
-        self.calorieScrollableGraphView.reload()
     }
     
+    // MARK: ScrollableGraphView
     func value(forPlot plot: Plot, atIndex pointIndex: Int) -> Double {
         return calorieLogs[pointIndex]
     }

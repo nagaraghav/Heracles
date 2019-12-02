@@ -18,12 +18,11 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
     @IBOutlet weak var workoutGoalLabel: UITextField!
     
     private var ref: DatabaseReference!
+    private var isFirstLoad = true
     
     // MARK: Notification
-    @objc func disconnectPaxiSocket(_ notification: Notification) {
-        self.loadPage()
-        
-        // TODO: stop activity indicator
+    @objc func dataLoaded(_ notification: Notification) {
+        self.workoutScrollableGraphView.reload()
     }
        
     
@@ -36,9 +35,15 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
         
         ref = Database.database().reference()
         // recieving notification to reload graph
-        NotificationCenter.default.addObserver(self, selector: #selector(disconnectPaxiSocket(_:)), name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dataLoaded(_:)), name: Notification.Name(rawValue: "dataLoaded"), object: nil)
         
-        self.loadPage()
+        if self.isFirstLoad {
+            self.workoutGoalLabel.text = workoutGoal
+            self.loadGraphSetup()
+            self.isFirstLoad = false
+        }
+        
+        self.workoutScrollableGraphView.reload()
     }
     
     func updateWorkoutGoal(newWorkoutGoal: String) {
@@ -69,8 +74,7 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
         view.endEditing(true)
     }
 
-     // MARK: ScrollableGraphView
-     
+     // MARK: setGoal
      func setGoal(){
          self.ref.child("user").child(logClient).child("workoutGoal").observeSingleEvent(of: .value, with: { (snapshot) in
              let value = snapshot.value
@@ -82,15 +86,8 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
           }
      }
     
-    // MARK: ScrollableGraphView
-    
-    private func loadPage() {
-        
-        setGoal()
-        
-        // grpah visual settings
-        //self.workoutScrollableGraphView.shouldAdaptRange = true
-        
+    // MARK: loafGraphSetup
+    private func loadGraphSetup() {
         
         self.workoutScrollableGraphView.rangeMin = 0
         // Setup the plot
@@ -113,8 +110,6 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
 
         self.workoutScrollableGraphView.addPlot(plot: barPlot)
         self.workoutScrollableGraphView.addReferenceLines(referenceLines: referenceLines)
-        
-        self.workoutScrollableGraphView.reload()
     }
     
     func value(forPlot plot: Plot, atIndex pointIndex: Int) -> Double {

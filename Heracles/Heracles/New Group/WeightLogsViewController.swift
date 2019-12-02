@@ -17,6 +17,8 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
     @IBOutlet weak var weightGoalLabel: UITextField!
     
     private var ref: DatabaseReference!
+    private var isFirstLoad = true
+    
     
     // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
@@ -28,19 +30,20 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
         weightsScrollableGraphView.dataSource = self
         
         // recieving notification to reload graph
-        NotificationCenter.default.addObserver(self, selector: #selector(disconnectPaxiSocket(_:)), name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dataLoaded(_:)), name: Notification.Name(rawValue: "dataLoaded"), object: nil)
         
-        self.loadPage()
+        if self.isFirstLoad {
+            self.weightGoalLabel.text = weightGoal
+            self.loadGraphSetup()
+            self.isFirstLoad = false
+        }
         
-        // TODO: start activity indicator
-        
+        self.weightsScrollableGraphView.reload()
     }
     
     // MARK: Notification
-    @objc func disconnectPaxiSocket(_ notification: Notification) {
-        self.loadPage()
-        
-        // TODO: stop activity indicator
+    @objc func dataLoaded(_ notification: Notification) {
+        self.weightsScrollableGraphView.reload()
     }
     
     func updateWeightGoal(newWeightGoal: String) {
@@ -71,8 +74,7 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
         view.endEditing(true)
     }
     
-    // MARK: ScrollableGraphView
-    
+    // MARK: setGoal
     func setGoal(){
         self.ref.child("user").child(logClient).child("weightGoal").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value
@@ -84,16 +86,14 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
         }
     }
     
-    private func loadPage() {
-        
-        setGoal()
-
-        self.weightsScrollableGraphView.rangeMax = 250
-        self.weightsScrollableGraphView.rangeMin = 0
-        self.weightsScrollableGraphView.reload()
+    // MARK: loadGraphSetup
+    private func loadGraphSetup() {
+        self.weightsScrollableGraphView.rangeMax = 300
+        self.weightsScrollableGraphView.rangeMin = 100
         
         let linePlot = LinePlot(identifier: "darkLine")
         let referenceLines = ReferenceLines()
+        let dotPlot = DotPlot(identifier: "darkLineDot")
         
         linePlot.lineWidth = 1
         linePlot.lineColor = UIColor.lightGray
@@ -105,7 +105,6 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
         linePlot.fillGradientStartColor = UIColor.gray
         linePlot.fillGradientEndColor = UIColor.lightGray
         linePlot.adaptAnimationType = ScrollableGraphViewAnimationType.elastic
-        let dotPlot = DotPlot(identifier: "darkLineDot") // Add dots as well.
         dotPlot.dataPointSize = 2
         dotPlot.dataPointFillColor = UIColor.white
         dotPlot.adaptAnimationType = ScrollableGraphViewAnimationType.elastic
@@ -115,7 +114,6 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
         referenceLines.dataPointLabelColor = UIColor.white.withAlphaComponent(0.5)
         self.weightsScrollableGraphView.backgroundFillColor = UIColor.darkGray
         self.weightsScrollableGraphView.shouldAnimateOnStartup = true
-        
         self.weightsScrollableGraphView.addReferenceLines(referenceLines: referenceLines)
         self.weightsScrollableGraphView.addPlot(plot: linePlot)
         self.weightsScrollableGraphView.addPlot(plot: dotPlot)

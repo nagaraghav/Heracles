@@ -22,8 +22,8 @@ var workoutLogs: [Double] = []
 class PageViewController: UIPageViewController,UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     private lazy var VCs: [UIViewController] = {
-        return [self.VCInstance(name: "WEIGHT"),
-                self.VCInstance(name: "CALORIE"),
+        return [self.VCInstance(name: "CALORIE"),
+                self.VCInstance(name: "WEIGHT"),
                 self.VCInstance(name: "WORKOUT")]
     }()
     
@@ -50,8 +50,8 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
         
         
         // Set first page
-        if let weightVC = self.VCs.first {
-            self.setViewControllers([weightVC], direction: .forward, animated: true, completion: nil)
+        if let calorieVC = self.VCs.first {
+            self.setViewControllers([calorieVC], direction: .forward, animated: true, completion: nil)
         }
         
        
@@ -188,8 +188,8 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                 }
             
             
-                //print("parse done")
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
+                // MARK: notification
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "dataLoaded"), object: nil)
                 
                 
         }) { (error) in
