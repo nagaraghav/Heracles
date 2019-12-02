@@ -35,7 +35,7 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
     // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        TrainerProfileImageView.layer.cornerRadius = TrainerProfileImageView.frame.height/2
         self.clientNames.removeAll()
         
         if let _ = FBSDKAccessToken.current()
@@ -88,7 +88,7 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
                 self.clientNames.append("\(firstName) \(lastName)")
                 self.ClientListTableView.reloadData()
             }
-             self.ClientCounterLabel.text = "\(self.clientNames.count)";
+             self.ClientCounterLabel.text = "\(self.clientNames.count) clients";
         }) { (error) in
             self.showNetworkError()
             print(error.localizedDescription)

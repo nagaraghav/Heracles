@@ -27,6 +27,7 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                 self.VCInstance(name: "WORKOUT")]
     }()
     
+    
     private func VCInstance(name: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
     }
@@ -37,7 +38,9 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
     
     // MARK: viewDidLoad
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        print("At PageViewController!")
 
         self.dataSource = self
         self.delegate = self
@@ -130,6 +133,8 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
     
     // MARK: getData
     private func getData(){
+     
+        
         ref = Database.database().reference()
         self.ref.child("user").child(self.clientID).observeSingleEvent(of: .value, with: { (snapshot) in
                 
@@ -161,6 +166,7 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                                 // There should always be data to cast as Double
                                 let val_log = log?[category] as? String
                                 if let val = val_log {
+                                    
                                     weightsLogs.append(Double(val)!)
                                 }
                             }
@@ -180,6 +186,8 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                         }
                     }
                 }
+            
+            
                 //print("parse done")
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "disconnectPaxiSockets"), object: nil)
                 

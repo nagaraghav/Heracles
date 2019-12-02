@@ -10,10 +10,11 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import FBSDKLoginKit
+import Gradients
 
 class ClientHomeViewController: UIViewController, AddedCalories {
    
-    
+
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -21,7 +22,13 @@ class ClientHomeViewController: UIViewController, AddedCalories {
     @IBOutlet weak var weightTF: UITextField!
     @IBOutlet weak var caloriesTF: UITextField!
     @IBOutlet weak var workoutTF: UITextField!
-    @IBOutlet weak var sleepTF: UITextField!
+
+
+    @IBOutlet weak var logsButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
+    
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var cameraButton: UIButton!
     
     var ref: DatabaseReference!
     var user: NSDictionary?
@@ -29,7 +36,35 @@ class ClientHomeViewController: UIViewController, AddedCalories {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.hidesWhenStopped = true
+        //setUpGradient()
+        setUpView()
+        
     }
+    
+    func setUpView(){
+        
+        logsButton.setImage(UIImage(named: "bar-chart.png"), for: UIControl.State.normal)
+      
+    settingsButton.setImage(UIImage(named: "settings.png"), for: UIControl.State.normal)
+          cameraButton.setImage(UIImage(named: "photo-camera.png"), for: UIControl.State.normal)
+        saveButton.layer.cornerRadius = 10
+        
+        weightTF.setUnderLine()
+        caloriesTF.setUnderLine()
+        workoutTF.setUnderLine()
+    }
+
+        func setUpGradient(){
+            let firstColor = UIColor(red: CGFloat(182/255.0), green: CGFloat(251/255.0), blue: CGFloat(255/255.0), alpha: 1.0)
+            let secondColor = UIColor(red: CGFloat(131/255.0), green: CGFloat(164/255.0), blue: CGFloat(212/255.0), alpha: 1.0)
+            
+
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = self.view.bounds
+            gradientLayer.colors = [firstColor.cgColor, secondColor.cgColor]
+            self.view.layer.insertSublayer(gradientLayer, at: 0)
+        }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -73,12 +108,12 @@ class ClientHomeViewController: UIViewController, AddedCalories {
             let calorie = log_today["calorie"] as? String ?? ""
             let weight = log_today["weight"] as? String ?? ""
             let workout = log_today["workout"] as? String ?? ""
-            let sleep = log_today["sleep"] as? String ?? ""
+           
             
             self.caloriesTF.text = calorie
             self.weightTF.text = weight
             self.workoutTF.text = workout
-            self.sleepTF.text = sleep
+
             self.activityIndicator.stopAnimating()
         }) { (error) in
             print(error.localizedDescription)
@@ -86,6 +121,30 @@ class ClientHomeViewController: UIViewController, AddedCalories {
             self.showNetworkError()
         }
     }
+    
+    
+    
+    // MARK: Logs button
+    /// - Parameter sender: <#sender description#>
+    @IBAction func logsButton(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle:nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "pageViewController")
+        
+        let pgVC = vc as! PageViewController
+        guard let user_ = self.user else{
+            print("no user")
+            return
+        }
+        
+        pgVC.clientID = Auth.auth().currentUser!.uid
+        logClient = Auth.auth().currentUser!.uid
+        pgVC.modalPresentationStyle = .fullScreen
+        self.present(pgVC, animated: true)
+
+    }
+    
+   
     
     
     func getDate() -> String {
@@ -107,53 +166,23 @@ class ClientHomeViewController: UIViewController, AddedCalories {
         let storyboard = UIStoryboard(name: "Main", bundle:nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "Settings")
         
-        let qrVC = vc as! Settings
+        let setVC = vc as! Settings
         guard let user_ = self.user else{
             print("no user")
             return
         }
         
-        qrVC.firstName_input = user_["firstName"] as? String ?? ""
-        qrVC.lastName_input = user_["lastName"] as? String ?? ""
-        qrVC.height_ = user_["height"] as? String ?? ""
-        
-        qrVC.modalPresentationStyle = .fullScreen
-        self.present(qrVC, animated: true)
+        setVC.firstName_input = user_["firstName"] as? String ?? ""
+        setVC.lastName_input = user_["lastName"] as? String ?? ""
+        setVC.height_ = user_["height"] as? String ?? ""
+        setVC.clientCode = user_["clientID"] as? String ?? ""
+        setVC.modalPresentationStyle = .fullScreen
+        self.present(setVC, animated: true)
     }
     
-    @IBAction func signOutButton(_ sender: Any) {
-        
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-            FBSDKLoginManager().logOut()
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-            showNetworkError()
-        }
-        
-        self.dismiss(animated: true) {
-            return
-        }
-        
-        
-    }
+  
     
-    @IBAction func qrButton(_ sender: Any) {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle:nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "clientQR")
-        
-        let qrVC = vc as! Client_QR_ViewController
-        guard let user_ = self.user else{
-            print("no user")
-            return
-        }
-        
-        qrVC.clientCode = user_["clientID"] as? String ?? ""
-        qrVC.modalPresentationStyle = .overFullScreen
-        self.present(qrVC, animated: true)
-    }
+
     
     @IBAction func cameraButton(_ sender: Any) {
         
@@ -186,7 +215,7 @@ class ClientHomeViewController: UIViewController, AddedCalories {
         }
         
         activityIndicator.startAnimating()
-        ref.child("user").child(userId).child("logs").child(dateLabel.text ?? "").setValue(["calorie": caloriesTF.text ?? "", "weight": weightTF.text ?? "", "sleep": sleepTF.text ?? "", "workout": workoutTF.text ?? ""]) {
+        ref.child("user").child(userId).child("logs").child(dateLabel.text ?? "").setValue(["calorie": caloriesTF.text ?? "", "weight": weightTF.text ?? "", "workout": workoutTF.text ?? ""]) {
             (error:Error?, ref:DatabaseReference) in
             if let error = error {
                 print("Data could not be saved: \(error).")

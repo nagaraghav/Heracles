@@ -26,7 +26,7 @@ class AddClientViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         super.viewDidLoad()
         
         codeText.delegate = self
-
+        codeText.setUnderLine()
         ref = Database.database().reference()
         let userID = Auth.auth().currentUser?.uid
         guard let userId = userID else {

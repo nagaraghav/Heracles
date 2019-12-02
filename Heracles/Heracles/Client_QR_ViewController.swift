@@ -14,6 +14,7 @@ class Client_QR_ViewController: UIViewController {
     @IBOutlet weak var clientCodeLabel: UILabel!
     var clientCode: String?
     
+    @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,10 +26,15 @@ class Client_QR_ViewController: UIViewController {
         
         qrCodeImage.image = image
         clientCodeLabel.text = clientCode ?? ""
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("client code in qr page: \(String(describing: clientCode))")
+        
+        backButton.setImage(UIImage(named: "back.png"), for: UIControl.State.normal)
+        
     }
     
     @IBAction func backButton(_ sender: Any) {

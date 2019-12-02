@@ -24,6 +24,7 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
     
     @IBOutlet weak var pictureButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     var delegate: AddedCalories?
     
@@ -31,6 +32,18 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         super.viewDidLoad()
         activityIndicator.hidesWhenStopped = true
         foodLabel.delegate = self
+        
+        setUpView()
+    }
+    
+    func setUpView(){
+        calorieTF.setUnderLine()
+        foodLabel.setUnderLine()
+        
+        backButton.setImage(UIImage(named: "back.png"), for: UIControl.State.normal)
+        
+        pictureButton.layer.cornerRadius = 10
+        addButton.layer.cornerRadius = 10
     }
     
     /*
@@ -128,16 +141,19 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
                 let step1 = responseJSON["foods"] as? NSArray
                 let step2 = step1?[0] as? NSDictionary
                            
-                guard let calories = step2?["nf_calories"] else {
+                guard let calories = step2?["nf_calories"] as? Double else {
                     print("Couldnt find calories in data")
                     DispatchQueue.main.async {
-                        self.calorieTF.text = "Calorie Data not available"
+                        self.calorieTF.text = "N/A"
                         self.activityIndicator.stopAnimating()
                     }
                     return
                 }
                 
                 DispatchQueue.main.async {
+                    
+                    calories.truncate(places: 2)
+                    
                     self.calorieTF.text = "\(calories)"
                     self.activityIndicator.stopAnimating()
                     self.addButton.isEnabled = true
@@ -232,6 +248,9 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         return request
     }
     
+ 
+    
+    
     
     func getTopFoodFromResponse(responseJSON: Any?) -> String {
         if let responseJSON = responseJSON as? [String: Any] {
@@ -255,5 +274,26 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
         }
         
         return "Detection Failed"
+    }
+}
+
+extension UITextField {
+    func setUnderLine() {
+        let border = CALayer()
+        let width = CGFloat(0.7)
+        border.borderColor = UIColor.black.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width-10, height: self.frame.size.height)
+        
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
+}
+
+extension Double
+{
+    func truncate(places : Int)-> Double
+    {
+        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
     }
 }

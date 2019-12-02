@@ -89,9 +89,10 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
         setGoal()
         
         // grpah visual settings
-        self.workoutScrollableGraphView.shouldAdaptRange = true
+        //self.workoutScrollableGraphView.shouldAdaptRange = true
         
         
+        self.workoutScrollableGraphView.rangeMin = 0
         // Setup the plot
         let barPlot = BarPlot(identifier: "bar")
         let referenceLines = ReferenceLines()

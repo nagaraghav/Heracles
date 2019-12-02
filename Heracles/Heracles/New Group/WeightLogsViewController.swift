@@ -33,7 +33,7 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
         self.loadPage()
         
         // TODO: start activity indicator
-
+        
     }
     
     // MARK: Notification
@@ -44,33 +44,33 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
     }
     
     func updateWeightGoal(newWeightGoal: String) {
-
+        
         ref.child("user").child(logClient).child("weightGoal").setValue(newWeightGoal)
     }
     
-   /*
-    When 'return' is pressed within a textbox, update weight goal
-    */
-   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-       hideKeyboard()
-    
-    guard let newWeight = textField.text else {
+    /*
+     When 'return' is pressed within a textbox, update weight goal
+     */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideKeyboard()
+        
+        guard let newWeight = textField.text else {
+            return true
+        }
+        
+        updateWeightGoal(newWeightGoal: newWeight)
         return true
     }
     
-       updateWeightGoal(newWeightGoal: newWeight)
-       return true
-   }
-   
-   //added UITapGestureRecognizer to View through interface builder
-   @IBAction func handleTap(recognizer: UITapGestureRecognizer) {
-       hideKeyboard()
-   }
-   
-   @objc func hideKeyboard(){
-       view.endEditing(true)
-   }
-
+    //added UITapGestureRecognizer to View through interface builder
+    @IBAction func handleTap(recognizer: UITapGestureRecognizer) {
+        hideKeyboard()
+    }
+    
+    @objc func hideKeyboard(){
+        view.endEditing(true)
+    }
+    
     // MARK: ScrollableGraphView
     
     func setGoal(){
@@ -79,17 +79,17 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
             if let goal = value as? String {
                 self.weightGoalLabel.text = goal
             }
-         }){ (error) in
-             print(error.localizedDescription)
-         }
+        }){ (error) in
+            print(error.localizedDescription)
+        }
     }
     
     private func loadPage() {
         
         setGoal()
-        // grpah visual settings
-        self.weightsScrollableGraphView.shouldAdaptRange = true
-        
+
+        self.weightsScrollableGraphView.rangeMax = 250
+        self.weightsScrollableGraphView.rangeMin = 0
         self.weightsScrollableGraphView.reload()
         
         let linePlot = LinePlot(identifier: "darkLine")
@@ -98,7 +98,7 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
         linePlot.lineWidth = 1
         linePlot.lineColor = UIColor.lightGray
         linePlot.lineStyle = ScrollableGraphViewLineStyle.smooth
-
+        
         linePlot.shouldFill = true
         linePlot.fillType = ScrollableGraphViewFillType.gradient
         linePlot.fillGradientType = ScrollableGraphViewGradientType.linear
@@ -115,7 +115,7 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
         referenceLines.dataPointLabelColor = UIColor.white.withAlphaComponent(0.5)
         self.weightsScrollableGraphView.backgroundFillColor = UIColor.darkGray
         self.weightsScrollableGraphView.shouldAnimateOnStartup = true
-
+        
         self.weightsScrollableGraphView.addReferenceLines(referenceLines: referenceLines)
         self.weightsScrollableGraphView.addPlot(plot: linePlot)
         self.weightsScrollableGraphView.addPlot(plot: dotPlot)
@@ -126,12 +126,12 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
         // Return the data for each plot.
         return weightsLogs[pointIndex]
     }
-
+    
     func label(atIndex pointIndex: Int) -> String {
         return dates[pointIndex]
         //return self.labels[pointIndex]
     }
-
+    
     func numberOfPoints() -> Int {
         return dates.count
     }
@@ -141,9 +141,9 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
     @IBAction func backPress() {
         
         self.dismiss(animated: true) {
-                   return
+            return
         }
     }
     
-   
+    
 }
