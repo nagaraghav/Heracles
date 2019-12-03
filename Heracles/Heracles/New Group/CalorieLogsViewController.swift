@@ -35,7 +35,9 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
         // recieving notification to reload graph
         NotificationCenter.default.addObserver(self, selector: #selector(dataLoaded(_:)), name: Notification.Name(rawValue: "dataLoaded"), object: nil)
         
-       self.calorieGoalLabel.text = calorieGoal
+        self.setGoal()
+        
+        //self.calorieGoalLabel.text = calorieGoal
     }
     
     func updateCalorieGoal(newCalorieGoal: String) {
