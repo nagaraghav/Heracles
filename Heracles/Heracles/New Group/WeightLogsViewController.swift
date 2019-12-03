@@ -36,9 +36,8 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
             self.weightGoalLabel.text = weightGoal
             self.loadGraphSetup()
             self.isFirstLoad = false
+            self.weightsScrollableGraphView.reload()
         }
-        
-        self.weightsScrollableGraphView.reload()
     }
     
     // MARK: Notification

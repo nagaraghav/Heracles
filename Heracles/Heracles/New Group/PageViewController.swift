@@ -134,6 +134,10 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
     // MARK: getData
     private func getData(){
      
+        weightsLogs.removeAll()
+        workoutLogs.removeAll()
+        calorieLogs.removeAll()
+        dates.removeAll()
         
         ref = Database.database().reference()
         self.ref.child("user").child(self.clientID).observeSingleEvent(of: .value, with: { (snapshot) in

@@ -219,7 +219,6 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         self.present(alert, animated: true, completion: nil)
     }
-    
 }
 
 // MARK: UIImageView extension

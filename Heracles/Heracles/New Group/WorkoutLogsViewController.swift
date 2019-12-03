@@ -41,9 +41,8 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
             self.workoutGoalLabel.text = workoutGoal
             self.loadGraphSetup()
             self.isFirstLoad = false
+            self.workoutScrollableGraphView.reload()
         }
-        
-        self.workoutScrollableGraphView.reload()
     }
     
     func updateWorkoutGoal(newWorkoutGoal: String) {
