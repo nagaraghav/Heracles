@@ -46,7 +46,6 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
     }
     
     func updateWeightGoal(newWeightGoal: String) {
-        
         ref.child("user").child(logClient).child("weightGoal").setValue(newWeightGoal)
     }
     
@@ -88,7 +87,7 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
     // MARK: loadGraphSetup
     private func loadGraphSetup() {
         self.weightsScrollableGraphView.rangeMax = 300
-        self.weightsScrollableGraphView.rangeMin = 100
+        self.weightsScrollableGraphView.rangeMin = 0
         
         let linePlot = LinePlot(identifier: "darkLine")
         let referenceLines = ReferenceLines()
@@ -120,6 +119,9 @@ class WeightLogsViewController: UIViewController, ScrollableGraphViewDataSource,
     }
     
     func value(forPlot plot: Plot, atIndex pointIndex: Int) -> Double {
+        if pointIndex >= weightsLogs.count {
+            return 0.0
+        }
         // Return the data for each plot.
         return weightsLogs[pointIndex]
     }

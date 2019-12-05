@@ -41,7 +41,6 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
     }
     
     func updateCalorieGoal(newCalorieGoal: String) {
-        
         ref.child("user").child(logClient).child("calorieGoal").setValue(newCalorieGoal)
     }
     
@@ -85,12 +84,10 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
         
         self.calorieScrollableGraphView.shouldAnimateOnStartup = true
         
-        // grpah visual settings
+        // graph visual settings
         //self.calorieScrollableGraphView.shouldAdaptRange = true
         self.calorieScrollableGraphView.rangeMax = 3000
         self.calorieScrollableGraphView.rangeMin = 1000
-        
-        
         
         let linePlot = LinePlot(identifier: "line") // Identifier should be unique for each plot.
         let referenceLines = ReferenceLines()
@@ -103,6 +100,10 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
     
     // MARK: ScrollableGraphView
     func value(forPlot plot: Plot, atIndex pointIndex: Int) -> Double {
+        if pointIndex >= calorieLogs.count {
+            return 0.0
+        }
+        
         return calorieLogs[pointIndex]
     }
     
@@ -118,7 +119,6 @@ class CalorieLogsViewController: UIViewController, ScrollableGraphViewDataSource
     
     // MARK: back button
     @IBAction func backPress() {
-        
         self.dismiss(animated: true) {
             return
         }

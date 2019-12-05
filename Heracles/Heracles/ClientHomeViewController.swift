@@ -12,7 +12,9 @@ import FirebaseAuth
 import FBSDKLoginKit
 import Gradients
 
-class ClientHomeViewController: UIViewController, AddedCalories {
+class ClientHomeViewController: UIViewController, AddedCalories, signOutProt {
+    
+    
    
 
     @IBOutlet weak var userNameLabel: UILabel!
@@ -90,7 +92,7 @@ class ClientHomeViewController: UIViewController, AddedCalories {
             let firstName = value?["firstName"] as? String ?? ""
             let lastName = value?["lastName"] as? String ?? ""
             
-            self.userNameLabel.text = "\(firstName) \(lastName)"
+            self.userNameLabel.text = "Welcome, \(firstName) \(lastName)"
             
             let logs_ = value?["logs"] as? NSDictionary
             guard let logs = logs_ else{
@@ -151,7 +153,7 @@ class ClientHomeViewController: UIViewController, AddedCalories {
         let date = Date()
         let format = DateFormatter()
         
-        format.dateFormat = "dd-MM-yyyy"
+        format.dateFormat = "MM-dd-yyyy"
         let formattedDate = format.string(from: date)
         return formattedDate
     }
@@ -176,6 +178,7 @@ class ClientHomeViewController: UIViewController, AddedCalories {
         setVC.lastName_input = user_["lastName"] as? String ?? ""
         setVC.height_ = user_["height"] as? String ?? ""
         setVC.clientCode = user_["clientID"] as? String ?? ""
+        setVC.delegate = self
         setVC.modalPresentationStyle = .fullScreen
         self.present(setVC, animated: true)
     }
@@ -213,6 +216,9 @@ class ClientHomeViewController: UIViewController, AddedCalories {
         guard let userId = userID else{
             return
         }
+        
+        
+        
         
         activityIndicator.startAnimating()
         ref.child("user").child(userId).child("logs").child(dateLabel.text ?? "").setValue(["calorie": caloriesTF.text ?? "", "weight": weightTF.text ?? "", "workout": workoutTF.text ?? ""]) {
@@ -263,5 +269,13 @@ class ClientHomeViewController: UIViewController, AddedCalories {
     
     @objc func hideKeyboard(){
         view.endEditing(true)
+    }
+    
+    func pressedSignOut() {
+        print("pressed sign out protocol shud work!")
+        
+        self.dismiss(animated: false) {
+            return
+        }
     }
 }

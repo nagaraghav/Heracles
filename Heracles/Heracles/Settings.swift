@@ -11,6 +11,11 @@ import FirebaseDatabase
 import FirebaseAuth
 import FBSDKLoginKit
 
+
+protocol signOutProt {
+    func pressedSignOut()
+}
+
 class Settings: UIViewController {
     
     @IBOutlet weak var firstName: UITextField!
@@ -23,13 +28,19 @@ class Settings: UIViewController {
     var height_: String?
     var gymName_: String?
     var account_type: String?
+    var delegate: ClientHomeViewController?
 
     @IBOutlet weak var qrButt: UIButton!
     
+    @IBOutlet weak var settingsButt: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     var ref: DatabaseReference!
+    
+    
+     
      var clientCode: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,7 +80,11 @@ class Settings: UIViewController {
               showNetworkError()
           }
           
-          self.dismiss(animated: true) {
+        
+        
+          self.dismiss(animated: false) {
+            
+            self.delegate?.pressedSignOut()
               return
           }
           
@@ -117,6 +132,7 @@ class Settings: UIViewController {
                 self.height.text = self.height_
             } else {
                 self.qrButt.isHidden = true
+                self.settingsButt.isHidden = true
                 self.height.placeholder = "Gym Name"
                 self.height.text = self.gymName_
             }
@@ -157,10 +173,6 @@ class Settings: UIViewController {
             }
         } else {
 
-       
-                
-            
-            
             if height_or_gym != self.gymName_ {
                 ref.child("user").child(id).child("gymName").setValue(height_or_gym)
             }

@@ -25,7 +25,6 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
         self.workoutScrollableGraphView.reload()
     }
        
-    
      // MARK: viewWillAppear
      override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -46,7 +45,6 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
     }
     
     func updateWorkoutGoal(newWorkoutGoal: String) {
-
          ref.child("user").child(logClient).child("workoutGoal").setValue(newWorkoutGoal)
      }
      
@@ -93,7 +91,6 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
         let barPlot = BarPlot(identifier: "bar")
         let referenceLines = ReferenceLines()
 
-
         barPlot.barWidth = 25
         barPlot.barLineWidth = 1
         barPlot.barLineColor = UIColor.lightGray
@@ -112,6 +109,10 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
     }
     
     func value(forPlot plot: Plot, atIndex pointIndex: Int) -> Double {
+        if pointIndex >= workoutLogs.count {
+            return 0.0
+        }
+        
         return workoutLogs[pointIndex]
     }
 
@@ -127,7 +128,6 @@ class WorkoutLogsViewController: UIViewController, ScrollableGraphViewDataSource
     
     // MARK: back button
     @IBAction func backPress() {
-        
         self.dismiss(animated: true) {
                    return
         }
