@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,6 +28,8 @@
                             <constraint firstItem="cPP-OA-Hdh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="240" id="JwG-jp-REm"/>
                             <constraint firstItem="cPP-OA-Hdh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XO4-Ie-kTh"/>
                             <constraint firstItem="cPP-OA-Hdh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="atF-JA-2EK"/>
+                            <constraint firstItem="cPP-OA-Hdh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pKj-AP-1fP"/>
+                            <constraint firstItem="cPP-OA-Hdh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="rYa-G0-j2e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
