@@ -17,6 +17,7 @@ var allUsers: NSDictionary = [:]
 class ViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var newUserPopup: UIView!
     let loginButton = FBSDKLoginButton()
     var ref: DatabaseReference!
@@ -24,10 +25,10 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
+        activityIndicator.hidesWhenStopped = true
         initLoginButton(button: loginButton)
         view.addSubview(loginButton)
-        ref = Database.database().reference()
-        getAllUsers()
     }
     
     func initLoginButton(button: FBSDKLoginButton) {
@@ -48,22 +49,33 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             allUsers = tempusers
 
         }) { (error) in
+            self.showNetworkError()
             print(error.localizedDescription)
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
+        DispatchQueue.main.async {
+            self.getAllUsers()
+        }
+                
         if FBSDKAccessToken.current() != nil {
+            print("found token")
+
+            loginButton.removeFromSuperview()
+            activityIndicator.startAnimating()
+            
             let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
             
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 if let error = error {
                     print(error)
+                    self.showNetworkError()
                     return
                 }
                 
                 guard let user = authResult?.user else {
+                    self.showNetworkError()
                     return
                 }
                 
@@ -75,6 +87,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                         
                         let type = snapshot.value as? String
                         
+                        self.activityIndicator.stopAnimating()
+                        
                         if type == "client" {
                             self.performSegue(withIdentifier: "loginToHome", sender: self)
                             print("client")
@@ -84,26 +98,38 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                         }
                     }) { (error) in
                         print(error.localizedDescription)
+                        self.showNetworkError()
                     }
                 } else {
+                    self.activityIndicator.stopAnimating()
                     self.loginButton.isHidden = true
                     self.newUserPopup.isHidden = false
                 }
             }
+        } else {
+            view.addSubview(loginButton)
         }
+         
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print(error as Any)
+            self.showNetworkError()
             return
         }
         
+        loginButton.removeFromSuperview()
+        
+        activityIndicator.startAnimating()
+        
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString) 
+        
         
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 print(error)
+                self.showNetworkError()
                 return
             }
             
@@ -114,10 +140,11 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             currentUser = user
             
             if self.doesUserExist(currentUser: user) {
-                print("found")
                 self.ref.child("user").child(user.uid).child("account_type").observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     let type = snapshot.value as? String
+                    
+                    self.activityIndicator.stopAnimating()
                     
                     if type == "client" {
                         self.performSegue(withIdentifier: "loginToHome", sender: self)
@@ -144,39 +171,49 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     @IBAction func clientButtonPressed(_ sender: Any) {
-        //TODO: create new entry for user in database with account type = client
+
         guard let user = currentUser else {
             return
         }
         
         self.ref.child("user/" + user.uid +  "/account_type").setValue("client")
-        
-        //hide popup
+        let names = self.getFirstandLastName(displayName: user.displayName ?? "")
+        setNewUserNames(userID: user.uid, firstName: names[0], lastName: names[1])
+
         newUserPopup.isHidden = true
         
         print("new client created")
-        //TODO: segue to client home page
         
         performSegue(withIdentifier: "loginToHome", sender: self)
     }
     
     
     @IBAction func trainerButtonPressed(_ sender: Any) {
-        //TODO: create new entry for user in database with account type = trainer
+        
         guard let user = currentUser else {
             return
         }
         
         self.ref.child("user/" + user.uid +  "/account_type").setValue("trainer")
+        let names = self.getFirstandLastName(displayName: user.displayName ?? "")
+        setNewUserNames(userID: user.uid, firstName: names[0], lastName: names[1])
         
-        //hide popup
         newUserPopup.isHidden = true
         
         print("new trainer created")
-        //TODO: segue to trainer home page
+
         performSegue(withIdentifier: "LoginToTrainerHome", sender: self)
     }
 
+    func setNewUserNames(userID: String, firstName: String, lastName: String){
+        self.ref.child("user/" + userID + "/firstName").setValue(firstName)
+        self.ref.child("user/" + userID + "/lastName").setValue(lastName)
+    }
+    
+    func getFirstandLastName(displayName: String) -> [String] {
+        return displayName.split{$0 == " "}.map(String.init)
+    }
+    
     func doesUserExist(currentUser: User) -> Bool {
         
         for user in allUsers {
@@ -188,5 +225,30 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         return false
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "LoginToTrainerHome" {
+            let segueVC : TrainerHomeViewController = segue.destination as! TrainerHomeViewController
+            
+            segueVC.allUsers = allUsers
+        }
+        
+    }
+    
+    /*
+     Function to show generic network error alert
+     */
+    func showNetworkError() {
+        let alert = UIAlertController(title: "Network Error", message: "Unable to establish network connection! Please try again later.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 }
+
+
 

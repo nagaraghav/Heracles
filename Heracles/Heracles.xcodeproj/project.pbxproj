@@ -15,9 +15,26 @@
 		92B0852E2377AA4300EEA54C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B0852C2377AA4300EEA54C /* Main.storyboard */; };
 		92B085332377AA4400EEA54C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B085312377AA4400EEA54C /* LaunchScreen.storyboard */; };
 		963845122383CDCD000F1EBF /* TrainerHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963845112383CDCD000F1EBF /* TrainerHomeViewController.swift */; };
+		963D28F62387C63400D39B99 /* NutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D28F42387C63400D39B99 /* NutritionViewController.swift */; };
+		963D28F72387C63400D39B99 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D28F52387C63400D39B99 /* Settings.swift */; };
+		963D28FB2389983B00D39B99 /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D28FA2389983B00D39B99 /* Logs.swift */; };
 		9661171F2383CF7F00FFB932 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661171E2383CF7F00FFB932 /* PageViewController.swift */; };
+		96611721238453C400FFB932 /* WeightLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96611720238453C400FFB932 /* WeightLogsViewController.swift */; };
+		968DE281238F53FF00A6A7A0 /* WorkoutLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968DE280238F53FF00A6A7A0 /* WorkoutLogsViewController.swift */; };
+		968DE288238F57AB00A6A7A0 /* CalorieLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968DE287238F57AB00A6A7A0 /* CalorieLogsViewController.swift */; };
+		AC395FB123937D4900A54515 /* qr-code.png in Resources */ = {isa = PBXBuildFile; fileRef = AC395FB023937D4900A54515 /* qr-code.png */; };
+		AC395FB323937F3600A54515 /* photo-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = AC395FB223937F3600A54515 /* photo-camera.png */; };
+		AC395FB523937F3A00A54515 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = AC395FB423937F3A00A54515 /* back.png */; };
+		AC395FB723937F3F00A54515 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = AC395FB623937F3E00A54515 /* logout.png */; };
+		AC395FB923937F4F00A54515 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = AC395FB823937F4F00A54515 /* settings.png */; };
+		AC395FBB2393804100A54515 /* bar-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = AC395FBA2393804100A54515 /* bar-chart.png */; };
+		AC7273482384B48F000FE7B7 /* NutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7273472384B48F000FE7B7 /* NutritionViewController.swift */; };
 		AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */; };
 		AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */; };
+		ACA69ECB2395C5EC00AC614D /* Heracles.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA69EC92395C5EB00AC614D /* Heracles.png */; };
+		ACA69ECC2395C5EC00AC614D /* HeraclesIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACA69ECA2395C5EB00AC614D /* HeraclesIcon.jpg */; };
+		ACA69ECD2395C89F00AC614D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92B0852F2377AA4400EEA54C /* Assets.xcassets */; };
+		ACBE9CE42384D5D300BE640D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBE9CE32384D5D300BE640D /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +50,25 @@
 		92B085322377AA4400EEA54C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92B085342377AA4400EEA54C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		963845112383CDCD000F1EBF /* TrainerHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerHomeViewController.swift; sourceTree = "<group>"; };
+		963D28F42387C63400D39B99 /* NutritionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutritionViewController.swift; sourceTree = "<group>"; };
+		963D28F52387C63400D39B99 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		963D28FA2389983B00D39B99 /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
 		9661171E2383CF7F00FFB932 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		96611720238453C400FFB932 /* WeightLogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightLogsViewController.swift; sourceTree = "<group>"; };
+		968DE280238F53FF00A6A7A0 /* WorkoutLogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogsViewController.swift; sourceTree = "<group>"; };
+		968DE287238F57AB00A6A7A0 /* CalorieLogsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieLogsViewController.swift; sourceTree = "<group>"; };
+		AC395FB023937D4900A54515 /* qr-code.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qr-code.png"; sourceTree = "<group>"; };
+		AC395FB223937F3600A54515 /* photo-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-camera.png"; sourceTree = "<group>"; };
+		AC395FB423937F3A00A54515 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		AC395FB623937F3E00A54515 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
+		AC395FB823937F4F00A54515 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		AC395FBA2393804100A54515 /* bar-chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-chart.png"; sourceTree = "<group>"; };
+		AC7273472384B48F000FE7B7 /* NutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewController.swift; sourceTree = "<group>"; };
 		AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHomeViewController.swift; sourceTree = "<group>"; };
 		AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client_QR_ViewController.swift; sourceTree = "<group>"; };
+		ACA69EC92395C5EB00AC614D /* Heracles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Heracles.png; sourceTree = "<group>"; };
+		ACA69ECA2395C5EB00AC614D /* HeraclesIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HeraclesIcon.jpg; sourceTree = "<group>"; };
+		ACBE9CE32384D5D300BE640D /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		BE9ACD3E2F44DE0CB66B5485 /* Pods-Heracles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heracles.release.xcconfig"; path = "Target Support Files/Pods-Heracles/Pods-Heracles.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,6 +95,14 @@
 		92B0851C2377AA4300EEA54C = {
 			isa = PBXGroup;
 			children = (
+				ACA69EC92395C5EB00AC614D /* Heracles.png */,
+				ACA69ECA2395C5EB00AC614D /* HeraclesIcon.jpg */,
+				AC395FBA2393804100A54515 /* bar-chart.png */,
+				AC395FB823937F4F00A54515 /* settings.png */,
+				AC395FB623937F3E00A54515 /* logout.png */,
+				AC395FB223937F3600A54515 /* photo-camera.png */,
+				AC395FB423937F3A00A54515 /* back.png */,
+				AC395FB023937D4900A54515 /* qr-code.png */,
 				92B085272377AA4300EEA54C /* Heracles */,
 				92B085262377AA4300EEA54C /* Products */,
 				938CAFDF434005EEB35EFD4A /* Pods */,
@@ -80,12 +121,17 @@
 		92B085272377AA4300EEA54C /* Heracles */ = {
 			isa = PBXGroup;
 			children = (
-				9661171E2383CF7F00FFB932 /* PageViewController.swift */,
+				AC99D90C2392411C009BB461 /* New Group */,
+				963D28F42387C63400D39B99 /* NutritionViewController.swift */,
+				963D28F52387C63400D39B99 /* Settings.swift */,
+				963D28FA2389983B00D39B99 /* Logs.swift */,
 				963845112383CDCD000F1EBF /* TrainerHomeViewController.swift */,
 				92B085282377AA4300EEA54C /* AppDelegate.swift */,
 				92B0852A2377AA4300EEA54C /* ViewController.swift */,
 				92594416237BD536005D01B5 /* GoogleService-Info.plist */,
 				92B0852C2377AA4300EEA54C /* Main.storyboard */,
+				ACBE9CE32384D5D300BE640D /* Settings.swift */,
+				AC7273472384B48F000FE7B7 /* NutritionViewController.swift */,
 				AC87F4B723837C5300E172F4 /* Client_QR_ViewController.swift */,
 				AC87F4B52380B57400E172F4 /* ClientHomeViewController.swift */,
 				92838A1E237B55FA00332577 /* AddClientViewController.swift */,
@@ -103,6 +149,17 @@
 				BE9ACD3E2F44DE0CB66B5485 /* Pods-Heracles.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		AC99D90C2392411C009BB461 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				968DE287238F57AB00A6A7A0 /* CalorieLogsViewController.swift */,
+				968DE280238F53FF00A6A7A0 /* WorkoutLogsViewController.swift */,
+				9661171E2383CF7F00FFB932 /* PageViewController.swift */,
+				96611720238453C400FFB932 /* WeightLogsViewController.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,9 +222,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC395FB923937F4F00A54515 /* settings.png in Resources */,
 				92B085332377AA4400EEA54C /* LaunchScreen.storyboard in Resources */,
+				AC395FB123937D4900A54515 /* qr-code.png in Resources */,
+				AC395FBB2393804100A54515 /* bar-chart.png in Resources */,
+				AC395FB523937F3A00A54515 /* back.png in Resources */,
 				92B0852E2377AA4300EEA54C /* Main.storyboard in Resources */,
+				ACA69ECB2395C5EC00AC614D /* Heracles.png in Resources */,
+				AC395FB723937F3F00A54515 /* logout.png in Resources */,
 				92594417237BD536005D01B5 /* GoogleService-Info.plist in Resources */,
+				ACA69ECC2395C5EC00AC614D /* HeraclesIcon.jpg in Resources */,
+				ACA69ECD2395C89F00AC614D /* Assets.xcassets in Resources */,
+				AC395FB323937F3600A54515 /* photo-camera.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,10 +287,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC87F4B823837C5300E172F4 /* Client_QR_ViewController.swift in Sources */,
+				963D28FB2389983B00D39B99 /* Logs.swift in Sources */,
 				9661171F2383CF7F00FFB932 /* PageViewController.swift in Sources */,
 				AC87F4B62380B57400E172F4 /* ClientHomeViewController.swift in Sources */,
+				AC7273482384B48F000FE7B7 /* NutritionViewController.swift in Sources */,
 				92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */,
 				963845122383CDCD000F1EBF /* TrainerHomeViewController.swift in Sources */,
+				ACBE9CE42384D5D300BE640D /* Settings.swift in Sources */,
+				963D28F62387C63400D39B99 /* NutritionViewController.swift in Sources */,
+				968DE281238F53FF00A6A7A0 /* WorkoutLogsViewController.swift in Sources */,
+				963D28F72387C63400D39B99 /* Settings.swift in Sources */,
+				968DE288238F57AB00A6A7A0 /* CalorieLogsViewController.swift in Sources */,
+				92B0852B2377AA4300EEA54C /* ViewController.swift in Sources */,
+				963845122383CDCD000F1EBF /* TrainerHomeViewController.swift in Sources */,
+				96611721238453C400FFB932 /* WeightLogsViewController.swift in Sources */,
 				92B085292377AA4300EEA54C /* AppDelegate.swift in Sources */,
 				92838A1F237B55FA00332577 /* AddClientViewController.swift in Sources */,
 			);
@@ -372,7 +448,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 12881DD760F26B7A25829055 /* Pods-Heracles.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BVT62X66MW;
 				INFOPLIST_FILE = Heracles/Info.plist;
@@ -380,7 +456,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.shivamdesai.Heracles;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ethanchiang.Heracles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -391,7 +467,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BE9ACD3E2F44DE0CB66B5485 /* Pods-Heracles.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BVT62X66MW;
 				INFOPLIST_FILE = Heracles/Info.plist;
@@ -399,7 +475,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.shivamdesai.Heracles;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ethanchiang.Heracles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

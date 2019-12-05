@@ -13,19 +13,28 @@ class Client_QR_ViewController: UIViewController {
     @IBOutlet weak var qrCodeImage: UIImageView!
     @IBOutlet weak var clientCodeLabel: UILabel!
     var clientCode: String?
+    
+    @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        // Do any additional setup after loading the view.
-        let image = generateQRCode(from: clientCode ?? "")
+        guard let code = clientCode else {
+            return
+        }
+        
+        let image = generateQRCode(from: code)
         
         qrCodeImage.image = image
         clientCodeLabel.text = clientCode ?? ""
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("client code in qr page: \(clientCode)")
+        print("client code in qr page: \(String(describing: clientCode))")
+        
+        backButton.setImage(UIImage(named: "back.png"), for: UIControl.State.normal)
+        
     }
     
     @IBAction func backButton(_ sender: Any) {
@@ -51,20 +60,16 @@ class Client_QR_ViewController: UIViewController {
         return nil
     }
 
-    
-    
-    
-    
-    
-    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+     Function to show generic network error alert
+     */
+    func showNetworkError() {
+        let alert = UIAlertController(title: "Network Error", message: "Unable to establish network connection! Please try again later.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
-    */
-
 }
