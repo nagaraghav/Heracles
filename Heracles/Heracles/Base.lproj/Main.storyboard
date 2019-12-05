@@ -450,9 +450,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e07-St-meO">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e07-St-meO">
                                 <rect key="frame" x="31" y="66" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="AcW-vF-59h"/>
+                                    <constraint firstAttribute="width" constant="30" id="xDi-7d-k7L"/>
+                                </constraints>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="back.png">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -482,7 +485,9 @@
                             <constraint firstItem="zut-C5-Bps" firstAttribute="centerX" secondItem="aOc-8A-5p2" secondAttribute="centerX" id="HcM-5L-8mD"/>
                             <constraint firstItem="h0W-Mm-KQd" firstAttribute="top" secondItem="GTb-PZ-StG" secondAttribute="bottom" constant="35" id="LOs-A5-04U"/>
                             <constraint firstItem="aOc-8A-5p2" firstAttribute="trailing" secondItem="GTb-PZ-StG" secondAttribute="trailing" constant="8" id="Lsu-zk-qgE"/>
+                            <constraint firstItem="e07-St-meO" firstAttribute="top" secondItem="aOc-8A-5p2" secondAttribute="top" constant="22" id="UC6-Bk-bul"/>
                             <constraint firstItem="aOc-8A-5p2" firstAttribute="trailing" secondItem="h0W-Mm-KQd" secondAttribute="trailing" constant="8" id="WYw-hw-o9N"/>
+                            <constraint firstItem="e07-St-meO" firstAttribute="leading" secondItem="aOc-8A-5p2" secondAttribute="leading" constant="31" id="X0B-Pz-EB5"/>
                             <constraint firstItem="GTb-PZ-StG" firstAttribute="centerX" secondItem="aOc-8A-5p2" secondAttribute="centerX" id="a25-fm-opR"/>
                             <constraint firstItem="aOc-8A-5p2" firstAttribute="trailing" secondItem="zut-C5-Bps" secondAttribute="trailing" constant="8" id="sGJ-z9-uHc"/>
                             <constraint firstItem="GTb-PZ-StG" firstAttribute="top" secondItem="zut-C5-Bps" secondAttribute="bottom" constant="27" id="wed-8U-ODk"/>
@@ -694,7 +699,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-Fa-BUC" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-Fa-BUC" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
                                 <rect key="frame" x="8" y="265" width="359" height="453"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="Fgn-nK-1Qj"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="gBs-p1-TEV"/>
@@ -781,7 +786,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="49"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFL-5c-xU8" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFL-5c-xU8" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
                                 <rect key="frame" x="8" y="265" width="359" height="453"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="cvX-oQ-FgU"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="d4E-Gp-eD9"/>
@@ -870,17 +875,17 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="00.00" placeholder="78.00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zPP-y7-0tk">
-                                <rect key="frame" x="8" y="285" width="359" height="64"/>
+                                <rect key="frame" x="8" y="269" width="359" height="64"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="52"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Water" placeholder="Apple" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bv6-xE-NYc">
-                                <rect key="frame" x="8" y="179" width="359" height="46"/>
+                                <rect key="frame" x="8" y="171" width="359" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hqo-sl-phd">
-                                <rect key="frame" x="177.66666666666666" y="241" width="20" height="20"/>
+                                <rect key="frame" x="177.66666666666666" y="233" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="hko-S7-fd3"/>
                                     <constraint firstAttribute="height" constant="20" id="sMT-tU-joM"/>
@@ -893,7 +898,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PG0-Wo-MyC">
-                                <rect key="frame" x="87.666666666666686" y="405" width="200" height="40"/>
+                                <rect key="frame" x="87.666666666666686" y="349" width="200" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="1fP-zn-neK"/>
@@ -908,7 +913,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVD-v5-kjp">
-                                <rect key="frame" x="87.666666666666686" y="461" width="200" height="40"/>
+                                <rect key="frame" x="87.666666666666686" y="405" width="200" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="D5R-x1-ngr"/>
@@ -923,23 +928,22 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n6x-Pw-PAt">
-                                <rect key="frame" x="20" y="369" width="335" height="389"/>
+                                <rect key="frame" x="20" y="453" width="335" height="305"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="cC0-0t-e0b" firstAttribute="top" secondItem="rJp-SN-9Gh" secondAttribute="top" constant="22" id="0AR-6r-4QG"/>
-                            <constraint firstItem="bv6-xE-NYc" firstAttribute="top" secondItem="RiX-mw-y25" secondAttribute="bottom" constant="32" id="4LR-XQ-rlX"/>
+                            <constraint firstItem="bv6-xE-NYc" firstAttribute="top" secondItem="RiX-mw-y25" secondAttribute="bottom" constant="24" id="4LR-XQ-rlX"/>
                             <constraint firstItem="zPP-y7-0tk" firstAttribute="leading" secondItem="rJp-SN-9Gh" secondAttribute="leading" constant="8" id="64h-Ca-NNU"/>
                             <constraint firstItem="cC0-0t-e0b" firstAttribute="leading" secondItem="rJp-SN-9Gh" secondAttribute="leading" constant="31" id="6X1-IX-sDX"/>
                             <constraint firstItem="rJp-SN-9Gh" firstAttribute="trailing" secondItem="n6x-Pw-PAt" secondAttribute="trailing" constant="20" id="6z2-sz-Eyv"/>
                             <constraint firstItem="hqo-sl-phd" firstAttribute="centerX" secondItem="vzv-xf-G6p" secondAttribute="centerX" id="I6W-Bz-vvt"/>
                             <constraint firstItem="rJp-SN-9Gh" firstAttribute="trailing" secondItem="zPP-y7-0tk" secondAttribute="trailing" constant="8" id="JZK-ua-u2H"/>
                             <constraint firstItem="HVD-v5-kjp" firstAttribute="top" secondItem="PG0-Wo-MyC" secondAttribute="bottom" constant="16" id="JhV-1O-xGv"/>
-                            <constraint firstItem="PG0-Wo-MyC" firstAttribute="top" secondItem="zPP-y7-0tk" secondAttribute="bottom" constant="56" id="LSH-T6-RrT"/>
+                            <constraint firstItem="PG0-Wo-MyC" firstAttribute="top" secondItem="zPP-y7-0tk" secondAttribute="bottom" constant="16" id="LSH-T6-RrT"/>
                             <constraint firstItem="RiX-mw-y25" firstAttribute="leading" secondItem="rJp-SN-9Gh" secondAttribute="leading" constant="8" id="PPB-Ia-124"/>
-                            <constraint firstItem="n6x-Pw-PAt" firstAttribute="top" secondItem="zPP-y7-0tk" secondAttribute="bottom" constant="20" id="QfC-1N-cBC"/>
                             <constraint firstItem="rJp-SN-9Gh" firstAttribute="bottom" secondItem="n6x-Pw-PAt" secondAttribute="bottom" constant="20" id="dOJ-gG-Dkp"/>
                             <constraint firstItem="bv6-xE-NYc" firstAttribute="leading" secondItem="rJp-SN-9Gh" secondAttribute="leading" constant="8" id="gXQ-Rx-ZCf"/>
                             <constraint firstItem="HVD-v5-kjp" firstAttribute="centerX" secondItem="vzv-xf-G6p" secondAttribute="centerX" id="kJF-kI-3Af"/>
@@ -948,8 +952,9 @@
                             <constraint firstItem="hqo-sl-phd" firstAttribute="top" secondItem="bv6-xE-NYc" secondAttribute="bottom" constant="16" id="mtG-VC-wli"/>
                             <constraint firstItem="PG0-Wo-MyC" firstAttribute="centerX" secondItem="vzv-xf-G6p" secondAttribute="centerX" id="qnI-d0-UbT"/>
                             <constraint firstItem="n6x-Pw-PAt" firstAttribute="leading" secondItem="rJp-SN-9Gh" secondAttribute="leading" constant="20" id="udt-px-tra"/>
-                            <constraint firstItem="zPP-y7-0tk" firstAttribute="top" secondItem="hqo-sl-phd" secondAttribute="bottom" constant="24" id="w89-8L-MYE"/>
+                            <constraint firstItem="zPP-y7-0tk" firstAttribute="top" secondItem="hqo-sl-phd" secondAttribute="bottom" constant="16" id="w89-8L-MYE"/>
                             <constraint firstItem="rJp-SN-9Gh" firstAttribute="trailing" secondItem="bv6-xE-NYc" secondAttribute="trailing" constant="8" id="wZa-E8-hQV"/>
+                            <constraint firstItem="n6x-Pw-PAt" firstAttribute="top" secondItem="HVD-v5-kjp" secondAttribute="bottom" constant="8" id="wvv-tt-qcI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rJp-SN-9Gh"/>
                         <connections>
@@ -973,7 +978,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3221.739130434783" y="89.732142857142847"/>
+            <point key="canvasLocation" x="3221.5999999999999" y="89.408866995073893"/>
         </scene>
         <!--Settings-->
         <scene sceneID="pi0-aR-0OB">
@@ -1138,7 +1143,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rd4-8l-l1M" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rd4-8l-l1M" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
                                 <rect key="frame" x="8" y="265" width="359" height="453"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="jrg-jn-2sH"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="QMX-AC-vbv"/>
