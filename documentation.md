@@ -6,6 +6,7 @@
 * Implement display of FB profile image with FBSDK
 * Implement UITableView for client list
 * Set up NotificationCenter to notify data updates
+* UI layout
 * Bug fixes 
 
 ## Kishan
