@@ -44,18 +44,16 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
 
         self.dataSource = self
         self.delegate = self
-        
+        weightsLogs.removeAll()
+        calorieLogs.removeAll()
+        workoutLogs.removeAll()
         
         self.getData()
-        
         
         // Set first page
         if let calorieVC = self.VCs.first {
             self.setViewControllers([calorieVC], direction: .forward, animated: true, completion: nil)
         }
-        
-       
-        
     }
     
     // MARK: UIPageControl
@@ -134,6 +132,10 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
     // MARK: getData
     private func getData(){
      
+        weightsLogs.removeAll()
+        workoutLogs.removeAll()
+        calorieLogs.removeAll()
+        dates.removeAll()
         
         ref = Database.database().reference()
         self.ref.child("user").child(self.clientID).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -156,7 +158,7 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                     
                     // There should be dates to cast as string, or else database is broken
                     let date = Array(date)
-                    dates.append("\(date[3])\(date[4])/\(date[0])\(date[1])")
+                    dates.append("\(date[0])\(date[1])/\(date[3])\(date[4])")
                     
                     let categories = log?.allKeys
                     
@@ -166,27 +168,38 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource, U
                                 // There should always be data to cast as Double
                                 let val_log = log?[category] as? String
                                 if let val = val_log {
-                                    
-                                    weightsLogs.append(Double(val)!)
+                                    if val != "" {
+                                        if let doub = Double(val) {
+                                            weightsLogs.append(doub)
+                                        }
+                                        
+                                    }
                                 }
                             }
                             if category == "calorie" {
                                 let val_log = log?[category] as? String
                                 if let val = val_log {
-                                    calorieLogs.append(Double(val)!)
+                                    if val != "" {
+                                        if let doub = Double(val) {
+                                            calorieLogs.append(doub)
+                                        }
+                                    }
                                 }
                             }
                             if category == "workout" {
                                 let val_log = log?[category] as? String
                                 if let val = val_log {
-                                    workoutLogs.append(Double(val)!)
+                                    if val != "" {
+                                        if let doub = Double(val) {
+                                            workoutLogs.append(doub)
+                                        }
+                                    }
                                 }
                             }
                             //print("working")
                         }
                     }
                 }
-            
             
                 // MARK: notification
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "dataLoaded"), object: nil)

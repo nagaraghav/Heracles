@@ -220,18 +220,7 @@ class TrainerHomeViewController: UIViewController, UITableViewDataSource, UITabl
         self.present(alert, animated: true, completion: nil)
     }
     
-    /*
-     Function to show generic network error alert
-     */
-    func showNetworkError() {
-        let alert = UIAlertController(title: "Network Error", message: "Unable to establish network connection! Please try again later.", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
+
     
 }
 
