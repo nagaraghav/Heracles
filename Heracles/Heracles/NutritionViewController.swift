@@ -225,6 +225,8 @@ class NutritionViewController: UIViewController, UINavigationControllerDelegate,
                 self.findCalories()
                 self.activityIndicator.stopAnimating()
                 self.pictureButton.isEnabled = true
+                self.view.bringSubviewToFront(self.addButton)
+                self.view.bringSubviewToFront(self.pictureButton)
             }
         }
 
